@@ -1,0 +1,106 @@
+{
+  "name": "home",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "829c06a0a3b73b02a6224f4bbb73d99c",
+      "css": "home",
+      "code": 59394,
+      "src": "elusive"
+    },
+    {
+      "uid": "36m3wq83tio3uymjbu44su7ior03u9cc",
+      "css": "shuffle",
+      "code": 59395,
+      "src": "typicons"
+    },
+    {
+      "uid": "b660aec4a0c2cdec04a3cd708e00fa07",
+      "css": "pause",
+      "code": 59398,
+      "src": "iconic"
+    },
+    {
+      "uid": "929ff290f0be577d2a2d587d5a53eec1",
+      "css": "play",
+      "code": 59399,
+      "src": "iconic"
+    },
+    {
+      "uid": "f0d8d7ccb0adb92a41c058d7fd9f11b2",
+      "css": "to-end",
+      "code": 59401,
+      "src": "iconic"
+    },
+    {
+      "uid": "2a3cd95de2621bd87479396f236fd2a4",
+      "css": "heart",
+      "code": 59403,
+      "src": "websymbols"
+    },
+    {
+      "uid": "1bcc6c6369c3d475fa27115f806ff2ad",
+      "css": "heart-empty",
+      "code": 59404,
+      "src": "websymbols"
+    },
+    {
+      "uid": "3d211fe82ca138fce185f8869d38df26",
+      "css": "calendar-outlilne",
+      "code": 59405,
+      "src": "typicons"
+    },
+    {
+      "uid": "dbd39eb5a1d67beb54cfcb535e840e0f",
+      "css": "plus",
+      "code": 59406,
+      "src": "iconic"
+    },
+    {
+      "uid": "81bb68665e8e595505272a746db07c7a",
+      "css": "dot-circled",
+      "code": 61842,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "5386cf333c67332c278b798c9fded7e5",
+      "css": "loop-alt",
+      "code": 59402,
+      "src": "iconic"
+    },
+    {
+      "uid": "6afd0c334e4d1dd182d44e9e63257174",
+      "css": "to-start",
+      "code": 59400,
+      "src": "iconic"
+    },
+    {
+      "uid": "9dd9e835aebe1060ba7190ad2b2ed951",
+      "css": "search",
+      "code": 59392,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "b714be5a812a474811604f700dfc87ce",
+      "css": "left-open",
+      "code": 61447,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "37910a1398001a5ccb541cb2a253a2c7",
+      "css": "right-open",
+      "code": 61446,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "b091a8bd0fdade174951f17d936f51e4",
+      "css": "folder-empty",
+      "code": 61716,
+      "src": "fontawesome"
+    }
+  ]
+}
