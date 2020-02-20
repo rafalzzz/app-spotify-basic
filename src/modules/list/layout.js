@@ -6,7 +6,7 @@ import {SearchBar} from './components/searchbar'
 import {ListHeader} from './components/listHeader'
 import {Table} from './components/table';
 
-export const ListLayout = ({handleOnChange, handleOnSubmit, songs, loading, error}) => (
+export const ListLayout = ({handleOnChange, handleOnSubmit, handleAddSongToFav, handleDeleteSongFromFav, songs, loading, error}) => (
     <ListContainer>
         <SearchBar
             handleOnChange={handleOnChange}
@@ -17,6 +17,9 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, songs, loading, erro
             songs={songs}
             loading={loading}
             error={error}
+
+            handleAddSongToFav={handleAddSongToFav}
+            handleDeleteSongFromFav={handleDeleteSongFromFav}
         />
 
     </ListContainer>

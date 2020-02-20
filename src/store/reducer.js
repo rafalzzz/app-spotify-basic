@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { songsReducer } from './songs/reducer';
+import { fetchSongsReducer } from './fetchSongs/reducer';
+import { favSongsReducer } from './favSongs/reducer'
 
 const reducers = {
-  songs: songsReducer,
+  fetchSongs: fetchSongsReducer,
+  favSongs: favSongsReducer
 };
 
 export const rootReducer = combineReducers(reducers);

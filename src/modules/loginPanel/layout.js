@@ -1,10 +1,12 @@
 import React from 'react';
 
-import {LoginContainer} from './login.styled'
-import {LoginForm} from './components/loginForm'
+import {Link} from "react-router-dom";
 
-export const LoginLayout = () => (
+import {LoginContainer} from './login.styled'
+
+export const Login = ({onClick}) => (
     <LoginContainer>
-        <LoginForm/>
+        <h1>Sign-in with:</h1>
+        <button onClick={onClick}>Google</button>
     </LoginContainer>
 )

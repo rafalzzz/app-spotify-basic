@@ -1,66 +1,55 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
+import {Switch, Route, useHistory} from "react-router-dom";
+
+import firebase, {db, auth} from '../common/firebase'
+
+import {Login} from './loginPanel/layout'
 import {LogoutMenu} from './logoutMenu/layout'
 import {Sidebar} from './sidebar/index'
 import {List} from './list/index'
 import {Footer} from './footer/index'
 
-import {LoginContainer} from './loginPanel/login.styled'
-
-import firebase from "firebase"
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-
-firebase.initializeApp({
-    apiKey: "AIzaSyA5UgL15JX4pq0fnAITMHIAx1FhhUj7ut8",
-    authDomain: "ify-7881d.firebaseapp.com"
-  })
-
 export const Layout = () => {
 
-    const [isSignedIn, setIsSignedIn] = useState(false)
+  const [user, setUser] = useState(false)
+  const history = useHistory();
 
-    const uiConfig = {
-        signInFlow: "popup",
-        signInOptions: [
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        ],
-        callbacks: {
-          signInSuccess: () => false
-        }
-      }
+  const signInUser = () => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    auth.signInWithPopup(provider)
+      .then(function(result) {
+        setUser(result.user.displayName)
+        console.log(result.user.displayName)
+        history.push('/user')
+      }).catch(function(error) {
+        console.log(error)
+      });
+  }
 
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged(user => {
-            setIsSignedIn(!!user)
-            console.log("user", user)
-    })}, []);
+  const handleSignOut = () => {
+      auth.signOut()
+      history.push('/')
+  }
 
-    const handleOnClick = () => {
-        firebase.auth().signOut()
-    }
-
-    return (
+  return (
     <div>
-
-        {isSignedIn ? (
-          <span>
-                <LogoutMenu
-                    onClick={handleOnClick}
-                    username={firebase.auth().currentUser.displayName}
-                />
-                <Sidebar/>
-                <List/>
-                <Footer/>
-          </span>
-        ) : (
-
-            <LoginContainer>
-                <StyledFirebaseAuth
-                    uiConfig={uiConfig}
-                    firebaseAuth={firebase.auth()}
-                />
-            </LoginContainer>
-        )}
+      <Switch>
+        <Route exact path="/">
+          <Login
+            onClick={signInUser}
+          />
+        </Route>
+        <Route exact path="/user">
+          <LogoutMenu
+            handleSignOut={handleSignOut}
+            username={user}
+          />
+          <Sidebar/>
+          <List/>
+          <Footer/> 
+        </Route> 
+      </Switch>  
     </div>
-    )
+  )
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LogoutContainer = styled.div`
-position: absolute
+position: absolute;
 left: 0px;
 top: 0px;
 width: 280px;
@@ -19,27 +19,33 @@ z-index: 3;
   color: #868686;
 }
 
+.dots:hover {
+  color: white;
+}
+
 .logoutMenu {
   position: absolute;
-  top: 70px;
+  top: 50px;
   left: 0px;
   width: 300px;
-  font-size: 24px;
+  font-size: 30px;
   border: solid 1px #868686;
-  background-color: #121212
+  background-color: #121212;
   text-align: center;
+  color: white;
+  padding-top: 30px;
 }
 
 button {
-  width: 150px;
-  font-size: 24px;
-  border: none;
-  background-color: #121212;
-  color: white;
+  width: 200px;
+  height: 50px;
   margin-bottom: 30px;
-  border: solid 1px #868686;
-  padding: 10px 0;
-  border-radius: 10px;
+  background-color: transparent;
+  border: solid 1px white;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.8em;
+  margin-top: 30px;
 }
-.
+
   `

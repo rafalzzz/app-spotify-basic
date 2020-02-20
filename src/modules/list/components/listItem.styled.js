@@ -23,9 +23,10 @@ export const ListItemContainer = styled.div`
     font-size: 1.3em;
     padding-top: 7px;
     height: 40px;
-    width: 118px;
+    width: 30px;
     font-weight: 700;
     text-align: right;
+    margin-left: 88px;
 }
 
 .titl {
@@ -35,7 +36,7 @@ export const ListItemContainer = styled.div`
     height: 38px;
     padding-left: 34px;
     width: calc(100% - 632px);
-    font-weight: 700;
+    font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -47,8 +48,9 @@ export const ListItemContainer = styled.div`
     height: 38px;
     padding-left: 50px;
     width: 235px;
-    font-weight: 700;
+    font-weight: 400;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .date {
@@ -58,6 +60,6 @@ export const ListItemContainer = styled.div`
     height: 39px;
     padding-left: 25px;
     width: 150px;
-    font-weight: 700;
+    font-weight: 400;
 }
 `

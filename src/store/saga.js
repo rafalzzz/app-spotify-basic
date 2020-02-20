@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { songsSaga } from './songs/saga';
+import { songsSaga } from './fetchSongs/saga';
 
 export function* rootSaga(services = {}) {
   yield all([songsSaga()]);
