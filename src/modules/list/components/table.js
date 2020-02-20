@@ -1,24 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {TableContainer} from './table.styled'
+import {TableHeader} from './tableHeader'
 import {ListItem} from './listItem'
 
-export const Table = ({songs, loading, error, handleAddSongToFav, handleDeleteSongFromFav}) => {
+export const Table = ({songs, loading, error, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, favList}) => {
+
+    useEffect(() => {
+        handleFetchSongs('pop');
+      }, []);
 
     return (    
     <TableContainer>
         <div className="table">
-            <div className="tableHeader">
-                <div className="col1"><i className="icon-heart-empty"/></div>
-                <div className="col2">TITLE</div>
-                <div className="col3">ARTIST</div>
-                <div className="col4"><i className="icon-calendar-outlilne"/></div>
-                <div style={{clear: "both"}}></div>
-            </div>
+            <TableHeader/>
             {songs && songs.map((song, i=0) => (
                 <div key={i++}>
                     <ListItem
                         song={song}
+                        favList={favList}
 
                         handleAddSongToFav={handleAddSongToFav}
                         handleDeleteSongFromFav={handleDeleteSongFromFav}

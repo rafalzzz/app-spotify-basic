@@ -3,7 +3,9 @@ import {
   DELETE_SONG_FROM_FAV_LIST, 
 } from './consts';
 
-export const favSongsReducer = (state = [], action) => {
+const initialState = []
+
+export const favSongsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_SONG_TO_FAV_LIST:
       return [
@@ -12,7 +14,7 @@ export const favSongsReducer = (state = [], action) => {
       ]
     case DELETE_SONG_FROM_FAV_LIST:
       return state.filter(song =>
-        song.song.previewUrl !== action.id)
+        song.song.previewUrl !== action.payload.id)
     default:
       return state;
   }

@@ -21,7 +21,7 @@ export const Layout = () => {
       .then(function(result) {
         setUser(result.user.displayName)
         console.log(result.user.displayName)
-        history.push('/user')
+        history.push('/user/main')
       }).catch(function(error) {
         console.log(error)
       });
@@ -40,7 +40,7 @@ export const Layout = () => {
             onClick={signInUser}
           />
         </Route>
-        <Route exact path="/user">
+        <Route path="/user">
           <LogoutMenu
             handleSignOut={handleSignOut}
             username={user}

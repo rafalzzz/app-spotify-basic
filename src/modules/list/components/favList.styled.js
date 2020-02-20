@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TableContainer = styled.div`
+export const FavListContainer = styled.div`
 background-color: transparent;
 width: 80%;
 height: 100px;

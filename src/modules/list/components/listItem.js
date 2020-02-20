@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {ListItemContainer} from './listItem.styled'
 
-export const ListItem = ({song, handleAddSongToFav, handleDeleteSongFromFav}) => {
+export const ListItem = ({song, handleAddSongToFav, handleDeleteSongFromFav, favList}) => {
 
     const [favChecked, setFavChecked] = useState(false)
 
@@ -15,6 +15,13 @@ export const ListItem = ({song, handleAddSongToFav, handleDeleteSongFromFav}) =>
             setFavChecked(false)
         }
     }
+
+    useEffect(() => {
+        favList.map(favListItem => {
+            if (favListItem.song.previewUrl === song.previewUrl)
+            setFavChecked(true)
+        });
+    }, []);
 
     return (
             <ListItemContainer>

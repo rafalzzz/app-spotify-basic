@@ -9,7 +9,7 @@ export const addSongToFav = payload => ({
     payload,
 });
 
-export const deleteSongFromFav = id => ({
+export const deleteSongFromFav = payload => ({
     type: DELETE_SONG_FROM_FAV_LIST,
-    id,
+    payload,
 });

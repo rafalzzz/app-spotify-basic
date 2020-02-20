@@ -1,4 +1,6 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
+
+import {useHistory} from "react-router-dom";
 
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -18,32 +20,31 @@ export const List = () => {
   const loading = useSelector(loadingSongs);
   const error = useSelector(isError);
 
+  const handleFetchSongs = useCallback((term) => {
+    dispatch(fetchSongsStarted({ term: term }));
+  }, []);
+  
+    const handleAddSongToFav = useCallback((song) => {
+      dispatch(addSongToFav({ song }));
+  }, []);
+  
+    const handleDeleteSongFromFav = useCallback((id) => {
+      dispatch(deleteSongFromFav({ id }));
+  }, []);
+
   const favList = useSelector(favSongsList)
 
   const dispatch = useDispatch();
-  const handleFetchSongs = useCallback((term) => {
-  dispatch(fetchSongsStarted({ term: term }));
-  }, []);
 
-  const handleAddSongToFav = useCallback((song) => {
-    dispatch(addSongToFav({ song }));
-  }, []);
-
-  const handleDeleteSongFromFav = useCallback((id) => {
-    dispatch(deleteSongFromFav({ id }));
-    }, []);
-
-  useEffect(() => {
-    handleFetchSongs('pop');
-  }, []);
+  const history = useHistory();
 
   const handleOnChange = (e) => {
-      setTerm(e.target.value)
+    setTerm(e.target.value)
   };
 
   const handleOnSubmit = (e) => {
-      e.preventDefault();
-      handleFetchSongs(term);
+    e.preventDefault();
+    handleFetchSongs(term);
   };
 
   console.log(favList)
@@ -54,12 +55,14 @@ export const List = () => {
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
 
+          handleFetchSongs={handleFetchSongs}
           handleAddSongToFav={handleAddSongToFav}
           handleDeleteSongFromFav={handleDeleteSongFromFav}
 
           songs={songs}
           loading={loading}
           error={error}
+          favList={favList}
         />
     </div>
   );
