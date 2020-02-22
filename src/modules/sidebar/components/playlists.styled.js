@@ -5,7 +5,8 @@ height: 520px;
 font-size: 1.1em;
 color: #8e8e8e;
 text-align: left;
-overflow: auto;
+overflow-y: scroll;
+overflow-x: hidden;
 
 ::-webkit-scrollbar {
   width: 22px;
@@ -35,5 +36,34 @@ overflow: auto;
   font-size: 1.17em;
   padding-top: 10px;
   padding-bottom: 11px;
+  width: 100%;
+  text-align: left;
+  color: #8e8e8e;
+  background-color: transparent;
+  border: none;
+}
+
+.playlistElement:hover {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.playlistElement:active {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.playlistElement:link {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.playlistElement:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
   `

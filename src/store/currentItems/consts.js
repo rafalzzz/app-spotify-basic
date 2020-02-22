@@ -1,0 +1,2 @@
+export const CURRENT_SONG = 'CURRENT_SONG';
+export const CURRENT_PLAYLIST = 'CURRENT_PLAYLIST';

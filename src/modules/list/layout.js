@@ -9,13 +9,15 @@ import {ListHeader} from './components/listHeader'
 import {Table} from './components/table';
 import {FavList} from './components/favList'
 
-export const ListLayout = ({handleOnChange, handleOnSubmit, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, songs, loading, error, favList}) => (
+export const ListLayout = ({handleOnChange, handleOnSubmit, handleDeletePlaylistButton, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, songs, loading, error, favList}) => (
     <ListContainer>
         <SearchBar
             handleOnChange={handleOnChange}
             handleOnSubmit={handleOnSubmit}
         />
-        <ListHeader/>
+        <ListHeader
+            handleDeletePlaylistButton={handleDeletePlaylistButton}
+        />
         <Switch>
         <Route path="/user/main">
             <Table

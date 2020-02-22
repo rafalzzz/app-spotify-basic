@@ -14,6 +14,10 @@ div {
   margin-left: 37px;
 }
 
+div:hover {
+  color: white;
+}
+
 .icon-plus {
   padding-right: 15px;
 }

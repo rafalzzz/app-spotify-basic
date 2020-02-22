@@ -66,7 +66,6 @@ p {
     font-size: 1.5em;
     text-align: center;
     border-radius: 25px;
-    border: solid 1px #7f7f7f;
 }
 
 .rb:active {
@@ -97,6 +96,30 @@ p {
 .pause:focus {
     border: none;
     outline: none;
+}
+
+.moreOptions {
+    position: absolute;
+    right: 20px;
+    top: 150px;
+    font-size: 1.3em;
+    text-align: center;
+    background-color: #121212;
+    z-index: 5;
+
+}
+
+.moreOptions > div {
+    margin: 1px solid #868686;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: solid 1px #868686;
+}
+
+.moreOptions > div:hover {
+    border: solid 1px white;
 }
 
 `
