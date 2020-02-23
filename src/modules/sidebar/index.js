@@ -1,4 +1,4 @@
-import React, {memo, useState, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -10,29 +10,30 @@ import {setCurrentPlaylist} from '../../store/currentItems/actions';
 
 import {SidebarLayout} from './layout'
 
-export const Sidebar = memo(() => {
+export const Sidebar = () => {
 
   const [playlistName, setPlaylistName] = useState("")
   const [playlistFormIsOpen, setPlaylistFormIsOpen] = useState(false)
 
   const playlistsList = useSelector(playlists);
+  const currentPlaylistName = useSelector(currentPlaylist);
 
   console.log(playlistsList)
   
   const dispatch = useDispatch();
 
-  const handleCreatePlaylist = useCallback((name) => {
-    dispatch(createPlaylist({ name }));
-  }, []);
-
-  const handleSetCurrentPlaylist = useCallback((name) => {
-    dispatch(setCurrentPlaylist({ name }));
-  }, []);
+  const handlePlaylistForm = useCallback( event => () => {
+    setPlaylistFormIsOpen(!playlistFormIsOpen)
+  }, [])
 
   const handlePlaylistName = (e) => {
     e.preventDefault()
     setPlaylistName(e.target.value)
-  };
+  }
+
+  const handleCreatePlaylist = useCallback((name) => {
+    dispatch(createPlaylist({ name }));
+  }, []);
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
@@ -41,21 +42,17 @@ export const Sidebar = memo(() => {
     setPlaylistFormIsOpen(false)
   };
 
-  const handlePlaylistForm = () => {
-    setPlaylistFormIsOpen(!playlistFormIsOpen)
-  }
-
-  const handleCurrentPlaylistName = (e) => {
-    handleSetCurrentPlaylist(e.target.value)
-  }
-
-  /* console.log(showCurrentPlaylist) */
+  const handleSetCurrentPlaylist = useCallback( name => event => {
+    dispatch(setCurrentPlaylist({ name }));
+    console.log(currentPlaylistName)
+  }, [])
 
   return (
     <div>
         <SidebarLayout
           playlists={playlistsList}
-          handleCurrentPlaylistName={handleCurrentPlaylistName}
+          handleSetCurrentPlaylist={handleSetCurrentPlaylist}
+          currentPlaylistName={currentPlaylistName}
 
           handleOnSubmit={handleOnSubmit}
           playlistFormIsOpen={playlistFormIsOpen}
@@ -64,4 +61,4 @@ export const Sidebar = memo(() => {
         />
     </div>
   );
-});
+};

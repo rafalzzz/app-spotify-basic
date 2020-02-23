@@ -9,14 +9,23 @@ import {ListHeader} from './components/listHeader'
 import {Table} from './components/table';
 import {FavList} from './components/favList'
 
-export const ListLayout = ({handleOnChange, handleOnSubmit, handleDeletePlaylistButton, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, songs, loading, error, favList}) => (
+export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, currentSongName, currentPlaylistName, handleOpenMoreOptions, handleCloseMoreOptions, handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, songs, loading, error, favList}) => (
     <ListContainer>
         <SearchBar
             handleOnChange={handleOnChange}
             handleOnSubmit={handleOnSubmit}
         />
         <ListHeader
-            handleDeletePlaylistButton={handleDeletePlaylistButton}
+            moreOptionsIsOpen={moreOptionsIsOpen}
+            handleOpenMoreOptions={handleOpenMoreOptions}
+
+            currentSongName={currentSongName}
+            currentPlaylistName={currentPlaylistName}
+
+            handleCloseMoreOptions={handleCloseMoreOptions}
+            handleAddSongToPlaylist={handleAddSongToPlaylist}
+            handleDeleteSongFromPlaylist={handleDeleteSongFromPlaylist}
+            handleDeletePlaylist={handleDeletePlaylist}
         />
         <Switch>
         <Route path="/user/main">
@@ -27,8 +36,10 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, handleDeletePlaylist
                 error={error}
                 favList={favList}
 
+                currentSongName={currentSongName}
                 handleAddSongToFav={handleAddSongToFav}
                 handleDeleteSongFromFav={handleDeleteSongFromFav}
+                handleSetCurrentSong={handleSetCurrentSong}
             />
         </Route>
         <Route path="/user/favourite-list">

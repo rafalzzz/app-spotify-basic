@@ -4,7 +4,7 @@ import {
 } from "./consts";
 
 const initialState = {
-  song: "",
+  song: {song: {previewUrl: ""}},
   playlist: ""
 }
 

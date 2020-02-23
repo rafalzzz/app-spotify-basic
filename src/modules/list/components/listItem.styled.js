@@ -12,6 +12,7 @@ export const ListItemContainer = styled.div`
     transform: translate(-150px);
     text-align: left;
     border-top:solid 1px #252525;
+    /* background-color: rgba(255,255,255,0.1); */
     margin-left: 150px;
     margin-right: 0px;
     width: calc(100% - 120px);

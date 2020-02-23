@@ -10,7 +10,7 @@ export const NewPlaylistForm = ({handlePlaylistForm, handleOnSubmit, handlePlayl
             <form onSubmit={handleOnSubmit}>
                 <input type="text" placeholder="Playlist name ..." onChange={handlePlaylistName}></input>
                 <div className="formContainerButtons">
-                    <button onClick={handlePlaylistForm} type="reset">Cancel</button>
+                    <button onClick={handlePlaylistForm()}>Cancel</button>
                     <button type="submit">OK</button>
                 </div>
             </form>

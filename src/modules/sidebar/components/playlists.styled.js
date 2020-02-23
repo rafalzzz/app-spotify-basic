@@ -42,28 +42,4 @@ overflow-x: hidden;
   background-color: transparent;
   border: none;
 }
-
-.playlistElement:hover {
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-
-.playlistElement:active {
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-
-.playlistElement:link {
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-
-.playlistElement:focus {
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
   `

@@ -7,12 +7,13 @@ import {Playlists} from './components/playlists'
 import {NewPlaylist} from './components/newplaylist'
 import {Album} from './components/album'
 
-export const SidebarLayout = ({playlists, handleCurrentPlaylistName, handleOnSubmit, playlistFormIsOpen, handlePlaylistForm, handlePlaylistName}) => (
+export const SidebarLayout = ({playlists, handleSetCurrentPlaylist, currentPlaylistName, handleOnSubmit, playlistFormIsOpen, handlePlaylistForm, handlePlaylistName}) => (
     <SidebarContainer>
         <Menu/>
         <Playlists
             playlists={playlists}
-            handleCurrentPlaylistName={handleCurrentPlaylistName}
+            handleSetCurrentPlaylist={handleSetCurrentPlaylist}
+            currentPlaylistName={currentPlaylistName}
         />
         <NewPlaylist
             handleOnSubmit={handleOnSubmit}

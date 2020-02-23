@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {ListItemContainer} from './listItem.styled'
 
-export const ListItem = ({song, handleAddSongToFav, handleDeleteSongFromFav, favList}) => {
+export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, favList}) => {
 
     const [favChecked, setFavChecked] = useState(false)
 
@@ -25,7 +25,7 @@ export const ListItem = ({song, handleAddSongToFav, handleDeleteSongFromFav, fav
 
     return (
             <ListItemContainer>
-                <div className="row">
+                <div className="row" style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent"}}>
                     <div className="favo" onClick={(e) => handleOnClick(song, song.previewUrl)}>
                         {
                         favChecked ? 
@@ -34,7 +34,7 @@ export const ListItem = ({song, handleAddSongToFav, handleDeleteSongFromFav, fav
                         <i className="icon-heart-empty"/>
                         }
                     </div>
-                    <div className="titl">{song.trackName}</div>
+                    <div className="titl" onClick={handleSetCurrentSong(song)}>{song.trackName}</div>
                     <div className="auth">{song.artistName}</div>
                     <div className="date">{song.releaseDate.slice(0, 10)}</div>
                 </div>
