@@ -1,6 +1,8 @@
 import { 
     CURRENT_SONG, 
-    CURRENT_PLAYLIST
+    CURRENT_PLAYLIST,
+    PLAY_OR_STOP,
+    PLAY_THIS_SONG
 } from "./consts";
 
 export const setCurrentSong = payload => ({
@@ -13,3 +15,12 @@ export const setCurrentPlaylist = payload => ({
     payload,
 });
 
+export const handlePlayOrStop = payload => ({
+    type: PLAY_OR_STOP,
+    payload
+});
+
+export const handlePlayThisSong = payload => ({
+    type: PLAY_THIS_SONG,
+    payload
+});

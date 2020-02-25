@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import {ListHeaderContainer} from './listHeader.styled'
 
-export const ListHeader = ({moreOptionsIsOpen, handleOpenMoreOptions, handleCloseMoreOptions, currentSongName, currentPlaylistName, handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist}) => {
+export const ListHeader = ({moreOptionsIsOpen, handleOpenMoreOptions, handleCloseMoreOptions, currentSongName, currentPlaylistName, playOrNot, handlePlayPause,handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist}) => {
 
     return (
         <ListHeaderContainer>
@@ -27,7 +27,7 @@ export const ListHeader = ({moreOptionsIsOpen, handleOpenMoreOptions, handleClos
                 <Link to="/user/favourite-list">
                     <button className="favs rb"><i className="icon-heart"/></button>
                 </Link>
-                <button className="pause">PAUSE</button>
+                <button className="pause" onClick={handlePlayPause}>{playOrNot ? "PAUSE" : "PLAY"}</button>
             </div>
         </ListHeaderContainer>
     )

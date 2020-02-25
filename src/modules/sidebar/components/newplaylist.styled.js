@@ -6,6 +6,7 @@ border-bottom: solid 1px #242424;
 height: 96px;
 color: #868686;
 text-align: left;
+margin-top: 16px;
 
 div {
   padding-top: 33px;

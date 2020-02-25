@@ -5,7 +5,6 @@ import {SidebarContainer} from './layout.styled';
 import {Menu} from './components/menu'
 import {Playlists} from './components/playlists'
 import {NewPlaylist} from './components/newplaylist'
-import {Album} from './components/album'
 
 export const SidebarLayout = ({playlists, handleSetCurrentPlaylist, currentPlaylistName, handleOnSubmit, playlistFormIsOpen, handlePlaylistForm, handlePlaylistName}) => (
     <SidebarContainer>
@@ -21,6 +20,5 @@ export const SidebarLayout = ({playlists, handleSetCurrentPlaylist, currentPlayl
             handlePlaylistForm={handlePlaylistForm}
             handlePlaylistName={handlePlaylistName}
         />
-        <Album/>
     </SidebarContainer>
 )

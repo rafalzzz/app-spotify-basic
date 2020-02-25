@@ -1,2 +1,4 @@
 export const CURRENT_SONG = 'CURRENT_SONG';
 export const CURRENT_PLAYLIST = 'CURRENT_PLAYLIST';
+export const PLAY_OR_STOP = "PLAY_OR_STOP"
+export const PLAY_THIS_SONG = "PLAY_THIS_SONG"

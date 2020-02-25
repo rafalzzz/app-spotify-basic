@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {ListItemContainer} from './listItem.styled'
 
-export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, favList}) => {
+export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, favList}) => {
 
     const [favChecked, setFavChecked] = useState(false)
 
@@ -35,7 +35,7 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
                         }
                     </div>
                     <div className="titl" onClick={handleSetCurrentSong(song)}>{song.trackName}</div>
-                    <div className="auth">{song.artistName}</div>
+                    <div className="auth" onClick={handlePlayThisSongNow(song)}>{song.artistName}</div>
                     <div className="date">{song.releaseDate.slice(0, 10)}</div>
                 </div>
             </ListItemContainer>

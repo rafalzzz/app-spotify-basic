@@ -4,12 +4,12 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {songsArray, loadingSongs, isError} from '../../store/fetchSongs/selectors';
 import {favSongsList} from '../../store/favSongs/selectors';
-import {currentSong, currentPlaylist} from '../../store/currentItems/selectors';
+import {currentSong, currentPlaylist, playOrStop} from '../../store/currentItems/selectors';
 
 import {fetchSongsStarted} from '../../store/fetchSongs/actions';
 import {addSongToFav, deleteSongFromFav} from '../../store/favSongs/actions';
 import {addSongToPlaylist, deleteSongFromPlaylist, deletePlaylist} from '../../store/playlists/actions';
-import {setCurrentSong} from '../../store/currentItems/actions';
+import {setCurrentSong, handlePlayOrStop, handlePlayThisSong} from '../../store/currentItems/actions';
 
 import {ListLayout} from './layout'
 
@@ -20,9 +20,10 @@ export const List = memo(() => {
 
   // Selectors
 
-  const songs = useSelector(songsArray);
-  const loading = useSelector(loadingSongs);
-  const error = useSelector(isError);
+  const songs = useSelector(songsArray)
+  const loading = useSelector(loadingSongs)
+  const error = useSelector(isError)
+  const playOrNot = useSelector(playOrStop)
 
   const currentPlaylistName = useSelector(currentPlaylist)
   const currentSongName = useSelector(currentSong)
@@ -44,6 +45,16 @@ export const List = memo(() => {
     handleFetchSongs(term);
   };
   
+  // PlayButton function
+
+  const handlePlayPause = useCallback(event => {
+    if (playOrNot === false) {
+        dispatch(handlePlayOrStop({ play: true }))
+    } else if (playOrNot === true) {
+        dispatch(handlePlayOrStop({ play: false }))
+    }
+}, [playOrNot])
+
   // Favourite songs functions
 
   const favList = useSelector(favSongsList)
@@ -78,6 +89,10 @@ export const List = memo(() => {
     dispatch(setCurrentSong({ song }));
   }, []);
 
+  const handlePlayThisSongNow = useCallback(song => event => {
+    dispatch(handlePlayThisSong({ song }))
+  }, [])
+
   // Other functions
 
   const handleOpenMoreOptions = useCallback(event => () => {
@@ -99,6 +114,9 @@ export const List = memo(() => {
           currentSongName={currentSongName}
           currentPlaylistName={currentPlaylistName}
 
+          playOrNot={playOrNot}
+          handlePlayPause={handlePlayPause}
+
           handleCloseMoreOptions={handleCloseMoreOptions}
           handleAddSongToPlaylist={handleAddSongToPlaylist}
           handleDeleteSongFromPlaylist={handleDeleteSongFromPlaylist}
@@ -108,6 +126,7 @@ export const List = memo(() => {
           handleAddSongToFav={handleAddSongToFav}
           handleDeleteSongFromFav={handleDeleteSongFromFav}
           handleSetCurrentSong={handleSetCurrentSong}
+          handlePlayThisSongNow={handlePlayThisSongNow}
 
           songs={songs}
           loading={loading}
