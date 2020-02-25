@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {songsArray, loadingSongs, isError} from '../../store/fetchSongs/selectors';
 import {favSongsList} from '../../store/favSongs/selectors';
-import {currentSong, currentPlaylist, playOrStop} from '../../store/currentItems/selectors';
+import {currentSong, currentPlaylist, playOrStop, NowPlayedSong} from '../../store/currentItems/selectors';
 
 import {fetchSongsStarted} from '../../store/fetchSongs/actions';
 import {addSongToFav, deleteSongFromFav} from '../../store/favSongs/actions';
@@ -24,6 +24,8 @@ export const List = memo(() => {
   const loading = useSelector(loadingSongs)
   const error = useSelector(isError)
   const playOrNot = useSelector(playOrStop)
+  const NowIsPlaying = useSelector(NowPlayedSong)
+
 
   const currentPlaylistName = useSelector(currentPlaylist)
   const currentSongName = useSelector(currentSong)
@@ -48,12 +50,11 @@ export const List = memo(() => {
   // PlayButton function
 
   const handlePlayPause = useCallback(event => {
-    if (playOrNot === false) {
-        dispatch(handlePlayOrStop({ play: true }))
-    } else if (playOrNot === true) {
-        dispatch(handlePlayOrStop({ play: false }))
-    }
-}, [playOrNot])
+    playOrNot ? 
+    dispatch(handlePlayOrStop({ play: false }))
+    :
+    dispatch(handlePlayOrStop({ play: true }))
+  }, [playOrNot])
 
   // Favourite songs functions
 
@@ -91,6 +92,7 @@ export const List = memo(() => {
 
   const handlePlayThisSongNow = useCallback(song => event => {
     dispatch(handlePlayThisSong({ song }))
+    dispatch(setCurrentSong({ song }));
   }, [])
 
   // Other functions
@@ -117,6 +119,7 @@ export const List = memo(() => {
           playOrNot={playOrNot}
           handlePlayPause={handlePlayPause}
 
+
           handleCloseMoreOptions={handleCloseMoreOptions}
           handleAddSongToPlaylist={handleAddSongToPlaylist}
           handleDeleteSongFromPlaylist={handleDeleteSongFromPlaylist}
@@ -127,6 +130,7 @@ export const List = memo(() => {
           handleDeleteSongFromFav={handleDeleteSongFromFav}
           handleSetCurrentSong={handleSetCurrentSong}
           handlePlayThisSongNow={handlePlayThisSongNow}
+          NowIsPlaying={NowIsPlaying}
 
           songs={songs}
           loading={loading}

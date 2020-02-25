@@ -54,6 +54,10 @@ export const ListItemContainer = styled.div`
     overflow: hidden;
 }
 
+.auth:hover {
+    cursor: pointer;
+}
+
 .date {
     float: left;
     padding-top: 8px;

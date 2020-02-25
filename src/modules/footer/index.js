@@ -1,8 +1,8 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 
 import {useSelector, useDispatch} from 'react-redux';
 
-import {currentSong, playOrStop, NowPlayedSong} from '../../store/currentItems/selectors'
+import {playOrStop, NowPlayedSong} from '../../store/currentItems/selectors'
 
 import {handlePlayOrStop} from '../../store/currentItems/actions';
 
@@ -11,7 +11,6 @@ import {FooterLayout} from './layout'
 export const Footer = () => {
 
     const playOrNot = useSelector(playOrStop)
-    const currentSongName = useSelector(currentSong)
     const currentPlayedSong = useSelector(NowPlayedSong)
 
     console.log("nowplayed", currentPlayedSong)
@@ -33,25 +32,24 @@ export const Footer = () => {
     const [loop, setLoop] = useState(false)
     const [showRemaining, setShowRemaining] = useState(false)
     const [volumeIcon, setVolumeIcon] = useState("icon-volume-up")
-    
-/*     const handlePlayThisSong = useCallback(event => {
-        dispatch(handlePlayThisSong({ song: currentSongName}))
-    }, []) */
+
+    const setSongUrl = useCallback((songUrl) => {
+        setUrl(currentPlayedSong.previewUrl)
+    }, [currentPlayedSong.previewUrl])
+
+    useEffect(() => {
+        dispatch(handlePlayOrStop({ play: false }))
+        setSongUrl(currentPlayedSong.previewUrl)
+        dispatch(handlePlayOrStop({ play: true }))
+    }, [currentPlayedSong.previewUrl])
 
     const handlePlayPause = useCallback(event => {
-        if (playOrNot === false) {
-            if ( url !== currentPlayedSong.previewUrl ) {
-                setUrl(currentPlayedSong.previewUrl)
-                dispatch(handlePlayOrStop({ play: true }))
-            } else if ( url === currentPlayedSong.previewUrl ) {
-                dispatch(handlePlayOrStop({ play: true }))
-            }
-            dispatch(handlePlayOrStop({ play: true }))
-        } else if (playOrNot === true) {
-            dispatch(handlePlayOrStop({ play: false }))
-        }
+        playOrNot === true ? 
+        dispatch(handlePlayOrStop({ play: false }))
+        :
+        dispatch(handlePlayOrStop({ play: true }))
     }, [playOrNot])
-    
+
     const handleToggleLoop = useCallback(event => {
         setLoop(!loop)
     }, [loop])

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {ListItemContainer} from './listItem.styled'
 
-export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, favList}) => {
+export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, favList, NowIsPlaying}) => {
 
     const [favChecked, setFavChecked] = useState(false)
 
@@ -25,7 +25,8 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
 
     return (
             <ListItemContainer>
-                <div className="row" style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent"}}>
+                <div className="row" style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
+                                            color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}}>
                     <div className="favo" onClick={(e) => handleOnClick(song, song.previewUrl)}>
                         {
                         favChecked ? 
