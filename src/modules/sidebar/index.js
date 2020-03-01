@@ -1,5 +1,7 @@
 import React, {useState, useCallback} from 'react';
 
+import {db} from '../../common/firebase'
+
 import {useSelector, useDispatch} from 'react-redux';
 
 import {playlists} from '../../store/playlists/selectors';
@@ -33,6 +35,17 @@ export const Sidebar = () => {
 
   const handleCreatePlaylist = useCallback((name) => {
     dispatch(createPlaylist({ name }));
+
+    db.collection("playlists").doc(name).set({
+      name: name,
+      songs: []
+    })
+    .then(function() {
+      console.log("Playlist successfully created!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
   }, []);
 
   const handleOnSubmit = (e) => {

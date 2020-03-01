@@ -118,14 +118,43 @@ export const List = memo(() => {
 
   const handleAddSongToPlaylist = useCallback((playlist, song) => event => {
     dispatch(addSongToPlaylist({ playlistName: playlist, song: song }));
+
+    db.collection("playlists").doc(playlist).update({
+      name: playlist,
+      songs: firebase.firestore.FieldValue.arrayUnion(song)
+    })
+    .then(function() {
+      console.log("Song successfully added to playlist!");
+    })
+    .catch(function(error) {
+        console.error("Error writing playlist: ", error);
+    });
+
+
   }, []);
 
   const handleDeleteSongFromPlaylist = useCallback((playlist, song) => event => {
     dispatch(deleteSongFromPlaylist({ playlistName: playlist, song: song }));
+
+    db.collection("playlists").doc(playlist).update({
+      songs: firebase.firestore.FieldValue.arrayRemove(song)
+    })
+    .then(function() {
+      console.log("Song successfully deleted from playlist!");
+    })
+    .catch(function(error) {
+        console.error("Error writing playlist: ", error);
+    });
   }, []);
 
   const handleDeletePlaylist = useCallback(name => event => {
-    dispatch(deletePlaylist({ name }));
+    dispatch(deletePlaylist({ name }))
+
+    db.collection("playlists").doc(name).delete().then(() => {
+      console.log("Playlist successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing playlist: ", error);
+  });
   }, []);
 
   // CurrentItems functions
