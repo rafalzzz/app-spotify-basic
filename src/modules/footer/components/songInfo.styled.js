@@ -3,37 +3,48 @@ import styled from 'styled-components';
 export const SongInfoContainer = styled.div`
 display: block;
 float: left;
-width: 255px;
-height: 80px;
-margin-left: 40px;
-margin-top: 20px;
+width: 200px;
+height: 45px;
+margin-left: 10px;
+margin-top: 0px;
 
 .songAlbum {
   display: block;
   float: left;
-  height: 78px;
-  width: 78px;
-  border: solid 1px white;
+  height: 45px;
+  width: 45px;
+}
+
+img {
+  width: 45px;
+  height: 45px;
 }
 
 .songTitle {
   display: block;
-  height: 32px;
-  margin-left: 80px;
+  height: 20px;
+  margin-left: 45px;
+  width: 250px;
   text-align: left;
-  padding-top: 5px;
+  margin-top: -5px;
   padding-left: 10px;
-  font-size: 1em;
+  font-size: 0.8em;
   color: white;
+  padding-bottom: 3px;
+  white-space: nowrap;
 }
 
 .songArtist {
   display: block;
-  height: 29px;
-  margin-left: 80px;
+  height: 22.5px;
+  width: 200px;
+  margin-left: 45px;
   text-align: left;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-left: 10px;
-  font-size: 0.8em;
+  font-size: 0.7em;
+  padding-bottom: 3px;
+  margin-top: -12px;
+  white-space: nowrap;
 }
   `

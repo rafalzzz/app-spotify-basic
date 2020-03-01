@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 export const ListContainer = styled.div`
-display: block;
 background-color: transparent;
-height: 100vh;
+height: 40%;
+width: calc(100% - 158px);
 color: #ffffff;
+position: absolute;
+right: 0;
+top: 0;
+flex-direction: row;
   `

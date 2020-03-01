@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 
 import {Switch, Route, useHistory} from "react-router-dom";
 
-import firebase, {db, auth} from '../common/firebase'
+import firebase, {auth} from '../common/firebase'
 
-import {Login} from './loginPanel/layout'
+import {Login} from './loginPanel/index'
 import {LogoutMenu} from './logoutMenu/layout'
 import {Sidebar} from './sidebar/index'
 import {List} from './list/index'
@@ -40,7 +40,7 @@ export const Layout = () => {
             onClick={signInUser}
           />
         </Route>
-        <Route path="/user">
+        <Route path="/user/">
           <LogoutMenu
             handleSignOut={handleSignOut}
             username={user}

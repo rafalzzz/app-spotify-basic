@@ -1,32 +1,36 @@
 import styled from 'styled-components';
 
 export const BarContainer = styled.div`
-display: block;
-height: 30px;
-width: 422px;
-margin-top: 40px;
-margin-left: 50%;
-transform: translate(-60%);
+display: flex;
+height: 20px;
 text-align: center;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin-top: -5px;
 
 .barElement {
-  float: left;
-}
-
-.bar {
-  margin-left: 5px;
-  margin-right: 5px;
+  width: 100%;
 }
 
 .number {
   width: 30px;
-  font-size: 0.8em;
+  font-size: 0.6em;
   padding-top: 6px;
+}
+
+.left {
+  margin-right: 5px;
+}
+
+.right {
+  margin-right: 8px;
+  margin-left: 6px;
 }
 
 input[type=range] {
   -webkit-appearance: none;
-  width: 350px;
+  width: 100%;
   margin: 3.8px 0;
   overflow: hidden;
   background-color: black;
@@ -38,7 +42,7 @@ input[type=range]:focus {
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-  width: 300px;
+  width: 100px;
   height: 4px;
   cursor: pointer;
   box-shadow: 0.2px 0.2px 1px #000000, 0px 0px 0.2px #0d0d0d;
@@ -60,7 +64,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]::-moz-range-track {
-  width: 300px;
+  width: 100px;
   height: 8.4px;
   cursor: pointer;
   box-shadow: 0.2px 0.2px 1px #000000, 0px 0px 0.2px #0d0d0d;
@@ -80,7 +84,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 input[type=range]::-ms-track {
-  width: 300px;
+  width: 100px;
   height: 8.4px;
   cursor: pointer;
   background: transparent;

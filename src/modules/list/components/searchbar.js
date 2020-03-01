@@ -4,8 +4,8 @@ import {SearchBarContainer} from './searchbar.styled'
 
 export const SearchBar = ({handleOnChange, handleOnSubmit}) => (
     <SearchBarContainer>
-        <button className="btn"><i className="icon-left-open"/></button>
-        <button className="btn"><i className="icon-right-open"/></button>
+        <button className="btn btnL"><i className="icon-left-open"/></button>
+        <button className="btn btnR"><i className="icon-right-open"/></button>
         <div className="search-container">
             <form onSubmit={handleOnSubmit}>
             <button type="submit" className="search-btn"><i className="icon-search"></i></button>

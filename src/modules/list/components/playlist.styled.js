@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FavListContainer = styled.div`
+export const PlaylistContainer = styled.div`
 background-color: #181818;
 height: calc(100vh - 320px);
 /* width: calc(100% - 193px); */

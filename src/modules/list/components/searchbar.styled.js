@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const SearchBarContainer = styled.div`
-display: block;
-height: 70px;
+height: 50px;
 text-align: left;
 background-color: #121212;
 
@@ -11,10 +10,14 @@ background-color: #121212;
     background-color: transparent;
     border: none;
     color: #868686;
-    font-size: 1.7em;
-    margin-top: 16px;
-    padding-left: 13px;
+    font-size: 1em;
+    margin-top: -2px;
+    padding-left: 0px;
     float: left;
+}
+
+.btnL {
+    margin-left: 10px;
 }
 
 .btn:active {
@@ -37,9 +40,10 @@ background-color: #121212;
     height: 35px;
     width: 270px;
     float: left;
-    margin-top: 16px;
+    margin-top: 7px;
+    margin-left: 3px;
     border-radius: 0px 17px 17px 0px;
-    font-size: 1.4em;
+    font-size: 0.8em;
 }
 
 .search-btn {
@@ -47,12 +51,12 @@ background-color: #121212;
     color: #868686;
     border: none;
     border-radius: 17px 0px 0px 17px;
-    height: 35px;
-    width: 35px;
+    height: 20px;
+    width: 18px;
     float: left;
-    font-size: 0.9em;
-    padding-top: 1px;
-    padding-left: 10px;
+    font-size: 0.95em;
+    padding-top: 0px;
+    padding-left: 2px;
     margin-top: 1px;
 }
 
@@ -77,11 +81,12 @@ input {
     border-radius: 0px 17px 17px 0px;
     color: #868686;
     border: none;
-    height: 33px;
-    width: 225px;
+    height: 18px;
+    width: 120px;
     font-size: 10px;
-    padding-left: 10px;
-    font-size: 0.8em;
+    padding-left: 3px;
+    margin-top: 1px;
+    font-size: 0.7em;
     font-weight: 700;
     letter-spacing: 1px;
 }

@@ -1,12 +1,20 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom'
+
 import {MenuContainer} from './menu.styled'
 import "../../../fontello/css/home.css"
 
 export const Menu = () => (
     <MenuContainer>
-        <div><i className="icon-home"/>Home</div>
+        <Link to="/user/about" style={{textDecoration: "none"}}>
+        <div><i className="icon-home"/>About</div>
+        </Link>
+        <Link to="/user/main" style={{textDecoration: "none"}}>
         <div><i className="icon-folder-empty"/>Browse</div>
-        <div><i className="icon-dot-circled"/>Radio</div>
+        </Link>
+        <Link to="/user/playlist" style={{textDecoration: "none"}}>
+        <div><i className="icon-note"/>Playlists</div>
+        </Link>
     </MenuContainer>
 )

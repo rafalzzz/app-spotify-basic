@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const PlaylistsContainer = styled.div`
-height: 520px;
+height: 200px;
 font-size: 1.1em;
 color: #8e8e8e;
 text-align: left;
 overflow-y: scroll;
 overflow-x: hidden;
+margin-top: -75px;
 
 ::-webkit-scrollbar {
   width: 22px;
@@ -24,18 +25,19 @@ overflow-x: hidden;
 }
 
 .playlistsTitle {
-  margin-left: 35px;
-  padding-top: 52px;
+  margin-left: 16px;
+  padding-top: 10px;
   font-weight: 700;
   letter-spacing: 2px;
+  font-size: 0.5em;
 }
 
 .playlistElement {
-  padding-left: 35px;
+  margin-left: 16px;
   font-weight: 700;
-  font-size: 1.17em;
-  padding-top: 10px;
-  padding-bottom: 11px;
+  font-size: 0.6em;
+  padding-top: 7px;
+  padding-bottom: 5px;
   width: 100%;
   text-align: left;
   color: #8e8e8e;

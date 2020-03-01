@@ -25,7 +25,7 @@ export const Footer = () => {
     const light = false
     const [volume, setVolume] = useState(0.8)
     const [muted, setMuted] = useState(false)
-    const [played, setPlayed] = useState(0.5)
+    const [played, setPlayed] = useState(0)
     const loaded = 0
     const [duration, setDuration] = useState(0)
     const playbackRate = 1.0
@@ -147,6 +147,8 @@ export const Footer = () => {
         handleEnded={handleEnded}
         handleDuration={handleDuration}
         handleSetRemaining={handleSetRemaining}
+
+        currentPlayedSong={currentPlayedSong}
         />
     )   
 }

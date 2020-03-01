@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FavListItemContainer = styled.div`
+export const PlaylistItemContainer = styled.div`
 height: 35px;
 width: 100%;
 background-color: transparent;

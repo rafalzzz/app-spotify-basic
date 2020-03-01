@@ -1,26 +1,27 @@
 import styled from 'styled-components';
 
 export const VolumeContainer = styled.div`
-display: block;
-position: absolute;
 float: right;
 height: 30px;
 width: 140px;
-margin-top: 20px;
-right: 30px;
+margin-top: 2px;
+display: flex;
+justify-content: flex-end;
+margin-right: 20px;
 
 .volumeElement {
     float: left;
   }
 
   .volIcon {
-    margin-top: 4.5px;
-    margin-right: 10px;
+    margin-top: 8px;
+    margin-right: 3px;
+    font-size: 0.75em;
   }
 
   input[type=range] {
     -webkit-appearance: none;
-    width: 100px;
+    width: 60px;
     margin: 3.8px 0;
     overflow: hidden;
     background-color: #404040;
@@ -33,7 +34,7 @@ right: 30px;
   
   input[type=range]::-webkit-slider-runnable-track {
     width: 300px;
-    height: 4px;
+    height: 3px;
     cursor: pointer;
     box-shadow: 0.2px 0.2px 1px #000000, 0px 0px 0.2px #0d0d0d;
     background: #868686;

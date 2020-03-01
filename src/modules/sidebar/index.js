@@ -37,9 +37,13 @@ export const Sidebar = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    handleCreatePlaylist(playlistName)
-    setPlaylistName("")
-    setPlaylistFormIsOpen(false)
+    if (playlistName === "") {
+      setPlaylistFormIsOpen(false)
+    } else if (playlistName !== "") {
+      handleCreatePlaylist(playlistName)
+      setPlaylistName("")
+      setPlaylistFormIsOpen(false)
+    }
   };
 
   const handleSetCurrentPlaylist = useCallback( name => event => {

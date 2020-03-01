@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-background-color: transparent;
-width: 80%;
-height: 100px;
+background-color: #181818;
+height: calc(100vh - 320px);
+/* width: calc(100% - 193px); */
+width: 1197px;
 display: block;
 position: absolute;
-left: 285px;
 
 .table {
     z-index: 1;
-    background-color: #181818;
+    /* background-color: #181818; */
     height: calc(100vh - 300px);
-    width: calc(100vw - 300px);
+    width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     border-top: solid 1px #252525;
 }
 
 .table::-webkit-scrollbar {
-    width: 22px;
+    width: 6px;
   }
   
 .table::-webkit-scrollbar-thumb {
@@ -29,7 +29,7 @@ left: 285px;
   }
   
 .table::-webkit-scrollbar-track-piece {
-    width: 20px;
+    width: 8px;
     background-color: #transparent;
   }
 

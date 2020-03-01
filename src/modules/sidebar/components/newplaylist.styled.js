@@ -3,16 +3,17 @@ import styled from 'styled-components';
 export const NewPlaylistContainer = styled.div`
 border-top: solid 1px #242424;
 border-bottom: solid 1px #242424;
-height: 96px;
+height: 50px;
 color: #868686;
 text-align: left;
 margin-top: 16px;
+margin-bottom: 70px;
 
 div {
-  padding-top: 33px;
-  font-size: 1.45em;
-  font-weight: 300;
-  margin-left: 37px;
+  padding-top: 18px;
+  font-size: 0.65em;
+  font-weight: 700;
+  padding-left: 19px;
 }
 
 div:hover {
@@ -20,6 +21,6 @@ div:hover {
 }
 
 .icon-plus {
-  padding-right: 15px;
+  padding-right: 11px;
 }
   `

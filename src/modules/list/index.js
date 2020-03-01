@@ -1,9 +1,12 @@
-import React, {useState, useCallback, memo} from 'react';
+import React, {useState, useEffect, useCallback, memo} from 'react';
+
+import firebase, {db} from '../../common/firebase'
 
 import {useSelector, useDispatch} from 'react-redux';
 
 import {songsArray, loadingSongs, isError} from '../../store/fetchSongs/selectors';
 import {favSongsList} from '../../store/favSongs/selectors';
+import {playlists} from '../../store/playlists/selectors';
 import {currentSong, currentPlaylist, playOrStop, NowPlayedSong} from '../../store/currentItems/selectors';
 
 import {fetchSongsStarted} from '../../store/fetchSongs/actions';
@@ -17,20 +20,34 @@ export const List = memo(() => {
 
   const [term, setTerm] = useState('');
   const [moreOptionsIsOpen, setMoreOptionsIsOpen] = useState(false)
+  const [currentPlaylistSongsList, setCurrentPlaylistSongsList] = useState([])
+
+  const dispatch = useDispatch()
 
   // Selectors
 
   const songs = useSelector(songsArray)
   const loading = useSelector(loadingSongs)
   const error = useSelector(isError)
+  const favList = useSelector(favSongsList)
   const playOrNot = useSelector(playOrStop)
   const NowIsPlaying = useSelector(NowPlayedSong)
+  
+  const currentPlaylistSongs = useSelector(playlists)
 
+  console.log(currentPlaylistSongs)
+
+  const returnCurrentPlaylistSongs = () => {
+    currentPlaylistSongs.map(playlist =>
+      playlist.name === currentPlaylistName ?
+      setCurrentPlaylistSongsList(playlist.songs)
+      :
+      null)
+  }
+  
 
   const currentPlaylistName = useSelector(currentPlaylist)
   const currentSongName = useSelector(currentSong)
-
-  const dispatch = useDispatch();
 
   // Searchbar functions
 
@@ -58,14 +75,41 @@ export const List = memo(() => {
 
   // Favourite songs functions
 
-  const favList = useSelector(favSongsList)
+  const handleDispatchAddSongToFav = useCallback( song => {
+    dispatch(addSongToFav({ song }))
+  }, [])
+
+  const handleSendFavListToFirestore = (song) => {
+      db.collection("favList").doc("favList").update({
+        songs: firebase.firestore.FieldValue.arrayUnion(song)
+      })
+      .then(function() {
+        console.log("Song successfully added!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
+  }
+
+      // update data on Firestorm
 
   const handleAddSongToFav = useCallback((song) => {
-      dispatch(addSongToFav({ song }));
-  }, []);
+    handleDispatchAddSongToFav(song)
+    handleSendFavListToFirestore(song)
+  }, [])
   
-  const handleDeleteSongFromFav = useCallback((id) => {
-      dispatch(deleteSongFromFav({ id }));
+  const handleDeleteSongFromFav = useCallback(( song, id) => {
+      dispatch(deleteSongFromFav({ id }))
+
+      db.collection("favList").doc("favList").update({
+        songs: firebase.firestore.FieldValue.arrayRemove(song)
+      })
+      .then(function() {
+        console.log("Song successfully deleted!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
   }, []);
 
   // Playlists functions
@@ -91,8 +135,19 @@ export const List = memo(() => {
   }, []);
 
   const handlePlayThisSongNow = useCallback(song => event => {
-    dispatch(handlePlayThisSong({ song }))
-    dispatch(setCurrentSong({ song }));
+    if (NowIsPlaying.previewUrl !== song.previewUrl) {
+      dispatch(handlePlayThisSong({ song }))
+      dispatch(setCurrentSong({ song }))
+    } else if (NowIsPlaying.previewUrl === song.previewUrl) {
+      dispatch(handlePlayOrStop({ play: false }))
+    }
+  }, [])
+
+  const handlePlayStopIcon = useCallback(song => event => {
+    NowIsPlaying.previewUrl === song.previewUrl ?
+    handlePlayPause()
+    :
+    handlePlayThisSongNow(song)
   }, [])
 
   // Other functions
@@ -130,12 +185,16 @@ export const List = memo(() => {
           handleDeleteSongFromFav={handleDeleteSongFromFav}
           handleSetCurrentSong={handleSetCurrentSong}
           handlePlayThisSongNow={handlePlayThisSongNow}
+          handlePlayStopIcon={handlePlayStopIcon}
           NowIsPlaying={NowIsPlaying}
+
+          returnCurrentPlaylistSongs={returnCurrentPlaylistSongs}
 
           songs={songs}
           loading={loading}
           error={error}
           favList={favList}
+          currentPlaylistSongsList={currentPlaylistSongsList}
         />
   );
 });

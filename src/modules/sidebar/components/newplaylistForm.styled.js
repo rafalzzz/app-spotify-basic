@@ -19,34 +19,43 @@ top: 0;
   margin-top: 0px;
   border: solid 1px #868686;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .formContainerTitle {
-  position: relative;
   left: 62px;
-  top: -40px;
   display: block;
   width: 400px;
   background-color: transparent;
   text-align: center;
+  font-size: 4em;
+  margin-bottom: 30px;
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
 }
 
 input {
   width: 380px;
   height: 30px;
-  left: 0px;
-  top: -30px;
-  position: relative;
   border-radius: 5px;
   border: none;
   color: #121212;
-  font-size: 0.6em;
+  font-size: 3em;
   padding-left: 20px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 .formContainerButtons {
-  margin-top: -50px;
-  margin-left: -10px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 
@@ -59,6 +68,6 @@ button {
   margin-left: 10px;
   position: relative;
   top: -20px;
-  font-size: 0.35em;
+  font-size: 4em;
 }
   `

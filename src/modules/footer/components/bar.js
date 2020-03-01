@@ -8,7 +8,7 @@ export const Bar = ({played, duration, showRemaining, handleSeekChange, handleSe
 
     return(
         <BarContainer>
-                <div className="barElement number">
+                <div className="barElement number left">
                     {<Duration seconds={duration * played} />}
                 </div>
                 <div className="barElement bar">
@@ -21,7 +21,7 @@ export const Bar = ({played, duration, showRemaining, handleSeekChange, handleSe
                     onChange={handleSeekChange}
                 />
                 </div>
-                <div className="barElement number" onClick={handleSetRemaining}>
+                <div className="barElement number right" onClick={handleSetRemaining}>
                     {
                     showRemaining? <Duration seconds={duration * (1 - played)}/>
                     : 

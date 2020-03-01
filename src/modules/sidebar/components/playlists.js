@@ -7,7 +7,7 @@ export const Playlists = ({playlists, handleSetCurrentPlaylist, currentPlaylistN
     return (
     <PlaylistsContainer>
         <div className="playlistsTitle">PLAYLISTS</div>
-        {playlists.map((playlist, i) => {
+        {playlists && playlists.map((playlist, i) => {
             return (
             <div key={i} style={{backgroundColor : currentPlaylistName === playlist.name ? "#ffffff10" : "transparent"}} className="playlistElement" onClick={handleSetCurrentPlaylist(playlist.name)}>{playlist.name}</div>
             )

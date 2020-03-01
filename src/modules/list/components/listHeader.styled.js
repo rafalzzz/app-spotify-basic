@@ -3,36 +3,38 @@ import styled from 'styled-components';
 export const ListHeaderContainer = styled.div`
 background-color: #121212;
 width: 100%;
-height: 100px;
+height: 200px;
 
 .album {
-    width: 55px;
-    height: 55px;
+    width: 176px;
+    height: 176px;
     background-color: white;
     float: left;
-    margin-left: 48px;
-    margin-top: 26px;
+    margin-left: 29px;
+    margin-top: 7px;
 }
 
 p {
     font-size: 2.5em;
     float: left;
-    margin-top: 24px;
-    margin-left: 24px;
+    margin-top: 44px;
+    margin-left: 20px;
     font-weight: 700;
     margin-bottom: 0px;
 }
 
 .pause {
-    float: right;
-    background-color: green;
+    position: absolute;
+    left: 225px;
+    top: 182px;
     margin-right: 16px;
     margin-top: 26px;
-    height: 50px;
-    width: 160px;
+    height: 25px;
+    width: 108px;
     background-color: #1db954;
+    border: 1px solid white;
     color: #e1f6e9;
-    font-size: 1em;
+    font-size: 0.6em;
     text-align: center;
     border-radius: 25px;
     letter-spacing: 2px;
@@ -42,28 +44,32 @@ p {
 
 
 .favs {
-    float: right;
+    position: absolute;
+    left: 343px;
+    top: 182px;
     margin-right: 16px;
     margin-top: 26px;
-    height: 50px;
-    width: 50px;
+    height: 25px;
+    width: 25px;
     background-color: transparent;
     color: white;
-    font-size: 1em;
+    font-size: 0.5em;
     text-align: center;
     border-radius: 25px;
     border: solid 1px #7f7f7f;
 }
 
 .more {
-    float: right;
+    position: absolute;
+    left: 378px;
+    top: 182px;
     margin-right: 45px;
     margin-top: 26px;
-    height: 50px;
-    width: 50px;
+    height: 25px;
+    width: 25px;
     background-color: transparent;
     color: white;
-    font-size: 1.5em;
+    font-size: 0.5em;
     text-align: center;
     border-radius: 25px;
 }
@@ -100,9 +106,9 @@ p {
 
 .moreOptions {
     position: absolute;
-    right: 20px;
-    top: 150px;
-    font-size: 1.3em;
+    left: 405px;
+    top: 207px;
+    font-size: 0.8em;
     text-align: center;
     background-color: #121212;
     z-index: 5;

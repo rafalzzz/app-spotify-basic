@@ -7,9 +7,9 @@ top: 0px;
 width: 280px;
 height: 50px;
 color: white;
-font-size: 2.6em;
+font-size: 1.4em;
 letter-spacing: 2px;
-padding-left: 39px;
+padding-left: 19px;
 text-align: left;
 z-index: 3;
 
@@ -27,8 +27,8 @@ z-index: 3;
   position: absolute;
   top: 50px;
   left: 0px;
-  width: 300px;
-  font-size: 30px;
+  width: 158px;
+  font-size: 0.5em;
   border: solid 1px #868686;
   background-color: #121212;
   text-align: center;
@@ -37,7 +37,7 @@ z-index: 3;
 }
 
 button {
-  width: 200px;
+  width: 140px;
   height: 50px;
   margin-bottom: 30px;
   background-color: transparent;

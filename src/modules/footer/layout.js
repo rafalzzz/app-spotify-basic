@@ -8,9 +8,11 @@ import {Bar} from './components/bar'
 
 import {LayoutContainer} from './layout.styled'
 
-export const FooterLayout = ({url, pip, playing, volume, muted, played, duration, loop, showRemaining, volumeIcon, handlePlayPause, handleToggleLoop, handleVolumeChange, handleToggleMuted, handlePlay, handlePause, handleSeekChange, handleProgress, handleEnded, handleDuration, handleSetRemaining}) => (
+export const FooterLayout = ({url, pip, playing, volume, muted, played, duration, loop, showRemaining, volumeIcon, handlePlayPause, handleToggleLoop, handleVolumeChange, handleToggleMuted, handlePlay, handlePause, handleSeekChange, handleProgress, handleEnded, handleDuration, handleSetRemaining, currentPlayedSong}) => (
     <LayoutContainer>
-        <SongInfo/>
+        <SongInfo
+        currentPlayedSong={currentPlayedSong}
+        />
         <div className="musicPlayer">
             <div className="icons">
                 <div className="iconLeft"><i className="icon-shuffle"/></div>
@@ -45,6 +47,14 @@ export const FooterLayout = ({url, pip, playing, volume, muted, played, duration
                     onDuration={handleDuration}
                 />
             </div>
+            <Bar
+                    played={played}
+                    duration={duration}
+                    showRemaining={showRemaining}
+                    handleSeekChange={handleSeekChange}
+                    handleSetRemaining={handleSetRemaining}
+            />
+        </div>
             <Volume
                 volume={volume}
                 muted={muted}
@@ -52,13 +62,5 @@ export const FooterLayout = ({url, pip, playing, volume, muted, played, duration
                 handleVolumeChange={handleVolumeChange}
                 handleToggleMuted={handleToggleMuted}
             />
-            <Bar
-                played={played}
-                duration={duration}
-                showRemaining={showRemaining}
-                handleSeekChange={handleSeekChange}
-                handleSetRemaining={handleSetRemaining}
-            />
-        </div>
     </LayoutContainer>
 )

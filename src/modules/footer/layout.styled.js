@@ -4,69 +4,79 @@ export const LayoutContainer = styled.div`
 position: fixed;
 bottom: 0px;
 left: 0px;
-height: 130px;
+height: 70px;
 width: 100%;
 background-color: #282828;
 color: #b3b3b3;
 z-index: 10;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 
 //musicPlayer styles
 
 .musicPlayer {
-  display: block;
-  float: left;
-  width: calc(100% - 360px);
+  align-self: center;
+  width: 50%;
   height: 80px;
-  margin-left: 40px;
+  margin-left: 0px;
   margin-top: 20px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: space-between;
+  margin-right: 42px;
+  flex-direction: column;
 }
 
 .icons {
-  display: block;
+  display: flex;
   float: left;
-  height: 40px;
-  width: 500px;
-  margin-left: 50%;
-  transform: translate(-60%);
+  height: 35px;
+  width: 200px;
+  margin-left: 0px;
+  align-self: center;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-top: -15px;
+
 }
 
 .icon {
-  display: block;
-  float: left;
   height: 23px;
   width: 30px;
-  margin-left: 20px;
-  font-size: 0.75em;
+  font-size: 0.6em;
   padding-top: 8px;
   padding-left: 1px;
 }
 
 .iconLeft {
-  display: block;
-  float: left;
   height: 23px;
   width: 30px;
-  margin-left: 0px;
-  font-size: 0.75em;
-  padding-top: 8px;
+  font-size: 0.7em;
+  padding-top: 6px;
   padding-left: 1px;
-  margin-left: 26%;
 }
 
 .iconRight {
-  font-size: 0.9em;
-  padding-top: 6px;
+  font-size: 0.8em;
+  margin-top: -6px;
 }
 
 .mainIcon {
   padding-top: 0px;
-  font-size: 1.4em;
-  height: 32px;
-  width: 32px;
-  border-radius: 16px;
+  font-size: 0.7em;
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
   padding-left: 0px;
   border: solid 1px white;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
   `

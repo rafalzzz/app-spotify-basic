@@ -4,7 +4,7 @@ import {TableContainer} from './table.styled'
 import {TableHeader} from './tableHeader'
 import {ListItem} from './listItem'
 
-export const Table = ({songs, loading, error, favList, handleFetchSongs, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, NowIsPlaying}) => {
+export const Table = ({songs, loading, error, favList, handleFetchSongs, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, handlePlayStopIcon, NowIsPlaying, playOrNot}) => {
 
     useEffect(() => {
         handleFetchSongs('pop');
@@ -26,10 +26,12 @@ export const Table = ({songs, loading, error, favList, handleFetchSongs, current
                         handleDeleteSongFromFav={handleDeleteSongFromFav}
                         handleSetCurrentSong={handleSetCurrentSong}
                         handlePlayThisSongNow={handlePlayThisSongNow}
+                        handlePlayStopIcon={handlePlayStopIcon}
                         NowIsPlaying={NowIsPlaying}
                     />
                 </div>
             ))}
+            <div style={{height: '17px'}}></div>
         </div>
     </TableContainer>
     )

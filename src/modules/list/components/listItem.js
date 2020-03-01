@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 
+import Duration from '../../../helpers/Duration'
+
 import {ListItemContainer} from './listItem.styled'
 
-export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, favList, NowIsPlaying}) => {
+export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, favList, handlePlayStopIcon, NowIsPlaying}) => {
 
     const [favChecked, setFavChecked] = useState(false)
 
@@ -11,7 +13,7 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
             handleAddSongToFav(song);
             setFavChecked(true);
         } if (favChecked === true) {
-            handleDeleteSongFromFav(id)
+            handleDeleteSongFromFav(song, id)
             setFavChecked(false)
         }
     }
@@ -25,9 +27,19 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
 
     return (
             <ListItemContainer>
-                <div className="row" style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
-                                            color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}}>
-                    <div className="favo" onClick={(e) => handleOnClick(song, song.previewUrl)}>
+            <div className="row"
+                onClick={handleSetCurrentSong(song)}>
+                    <div className="playStopIconBorder"
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent"}}
+                        onClick={handlePlayThisSongNow(song)}
+                        >
+                            <div className="playStopIcon">
+                                <i className="icon-play"/>
+                            </div>
+                    </div>
+                    <div className="favo" 
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent"}} 
+                        onClick={(e) => handleOnClick(song, song.previewUrl)}>
                         {
                         favChecked ? 
                         <i className="icon-heart"/>
@@ -35,9 +47,35 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
                         <i className="icon-heart-empty"/>
                         }
                     </div>
-                    <div className="titl" onClick={handleSetCurrentSong(song)}>{song.trackName}</div>
-                    <div className="auth" onClick={handlePlayThisSongNow(song)}>{song.artistName}</div>
-                    <div className="date">{song.releaseDate.slice(0, 10)}</div>
+                    <div className="titl" 
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
+                        color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}} 
+                        >
+                            {song.trackName}
+                        </div>
+                    <div className="auth" 
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
+                        color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}}
+                        >
+                            {song.artistName}
+                        </div>
+                    <div className="album" 
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
+                        color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}}
+                        >
+                            {song.collectionName}
+                        </div>
+                    <div className="date" 
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
+                        color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}}>
+                            {song.releaseDate.slice(0, 10)}
+                        </div>
+                    <div className="time" 
+                        style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent",
+                        color: NowIsPlaying.previewUrl === song.previewUrl ? "#1ed760" : "#b3b3b3"}}
+                        >
+                            <Duration seconds={parseInt(song.trackTimeMillis / 1000)} />
+                        </div>
                 </div>
             </ListItemContainer>
     )
