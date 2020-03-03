@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useEffect, useRef} from 'react';
 
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -13,11 +13,7 @@ export const Footer = () => {
     const playOrNot = useSelector(playOrStop)
     const currentPlayedSong = useSelector(NowPlayedSong)
 
-    console.log("nowplayed", currentPlayedSong)
-
     const dispatch = useDispatch()
-
-    console.log(playOrNot)
 
     const [url, setUrl] = useState("https://audio-ssl.itunes.apple.com/itunes-assets/Music7/v4/3c/e7/ac/3ce7ac90-4834-151a-667e-2259c7e7bd38/mzaf_760160703636187828.plus.aac.p.m4a")
     const pip = false
@@ -25,7 +21,6 @@ export const Footer = () => {
     const light = false
     const [volume, setVolume] = useState(0.8)
     const [muted, setMuted] = useState(false)
-    const [played, setPlayed] = useState(0)
     const loaded = 0
     const [duration, setDuration] = useState(0)
     const playbackRate = 1.0
@@ -62,10 +57,6 @@ export const Footer = () => {
     const handleToggleMuted = useCallback(event => {
         setMuted(!muted)
     }, [muted])
-    
-    const asd = () => {
-        setPlayed(0.5)
-    }
 
     const handlePlay = useCallback(event => {
         dispatch(handlePlayOrStop({ play: true }))
@@ -74,16 +65,6 @@ export const Footer = () => {
     const handlePause = useCallback(event => {
         dispatch(handlePlayOrStop({ play: false }))
     }, [])
-  
-    const handleSeekChange = e => {
-        setPlayed(parseFloat(e.target.value))
-    }
-
-    const handleProgress =  value => {
-        console.log('onProgress', value)
-        // We only want to update time slider if we are not currently seeking
-        setPlayed(parseFloat(value.played))
-        }
     
     const handleEnded = useCallback(event => () => {
         console.log('onEnded')
@@ -127,7 +108,6 @@ export const Footer = () => {
         light={light}
         volume={volume}
         muted={muted}
-        played={played}
         loaded={loaded}
         duration={duration}
         playbackRate={playbackRate}
@@ -135,15 +115,12 @@ export const Footer = () => {
         showRemaining={showRemaining}
         volumeIcon={volumeIcon}
 
-        asd={asd}
         handlePlayPause={handlePlayPause}
         handleToggleLoop={handleToggleLoop}
         handleVolumeChange={handleVolumeChange}
         handleToggleMuted={handleToggleMuted}
         handlePlay={handlePlay}
         handlePause={handlePause}
-        handleSeekChange={ handleSeekChange}
-        handleProgress={handleProgress}
         handleEnded={handleEnded}
         handleDuration={handleDuration}
         handleSetRemaining={handleSetRemaining}

@@ -4,9 +4,9 @@ import Duration from '../../../helpers/Duration'
 
 import {BarContainer} from './bar.styled'
 
-export const Bar = ({played, duration, showRemaining, handleSeekChange, handleSetRemaining}) => {
+export const Bar = ({played, duration, showRemaining, handleSeekChange, handleSetRemaining, handleSeekMouseUp, handleSeekMouseDown}) => {
 
-    return(
+     return(
         <BarContainer>
                 <div className="barElement number left">
                     {<Duration seconds={duration * played} />}
@@ -19,6 +19,8 @@ export const Bar = ({played, duration, showRemaining, handleSeekChange, handleSe
                     step='any'
                     value={played}
                     onChange={handleSeekChange}
+                    onMouseUp={handleSeekMouseUp}
+                    onMouseDown={handleSeekMouseDown}
                 />
                 </div>
                 <div className="barElement number right" onClick={handleSetRemaining}>
