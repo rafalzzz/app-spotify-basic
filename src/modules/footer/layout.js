@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 
 import ReactPlayer from 'react-player'
 
@@ -8,23 +8,9 @@ import {Bar} from './components/bar'
 
 import {LayoutContainer} from './layout.styled'
 
-export const FooterLayout = ({url, pip, playing, volume, muted, duration, loop, showRemaining, volumeIcon, handlePlayPause, handleToggleLoop, handleVolumeChange, handleToggleMuted, handlePlay, handlePause, handleEnded, handleDuration, handleSetRemaining, currentPlayedSong}) => {
-
-    const [played, setPlayed] = useState(0)
-
-    const ref = useRef(null)
-
-    const handleProgress =  value => {
-        // We only want to update time slider if we are not currently seeking
-        setPlayed(parseFloat(value.played))
-    }
-
-    const handleSeekChange = e => {
-        setPlayed(parseFloat(e.target.value))
-        ref.current.seekTo(parseFloat(e.target.value))
-    }
-
-    return(
+export const FooterLayout = React.forwardRef(({url, pip, playing, volume, muted, duration, loop, showRemaining, volumeIcon, handlePlayPause, handleToggleLoop, handleVolumeChange, handleToggleMuted, handlePlay, handlePause, handleEnded, handleDuration, handleSetRemaining, currentPlayedSong, played, handleProgress, handleSeekChange}, ref) => {
+  
+    return (
     <LayoutContainer>
         <SongInfo
         currentPlayedSong={currentPlayedSong}
@@ -80,4 +66,4 @@ export const FooterLayout = ({url, pip, playing, volume, muted, duration, loop, 
             />
     </LayoutContainer>
     )
-}
+});

@@ -15,6 +15,7 @@ export const Footer = () => {
 
     const dispatch = useDispatch()
 
+    const [played, setPlayed] = useState(0)
     const [url, setUrl] = useState("https://audio-ssl.itunes.apple.com/itunes-assets/Music7/v4/3c/e7/ac/3ce7ac90-4834-151a-667e-2259c7e7bd38/mzaf_760160703636187828.plus.aac.p.m4a")
     const pip = false
     const controls = false
@@ -48,7 +49,19 @@ export const Footer = () => {
     const handleToggleLoop = useCallback(event => {
         setLoop(!loop)
     }, [loop])
-    
+
+    const ref = useRef(null)
+
+    const handleProgress =  value => {
+        setPlayed(parseFloat(value.played))
+    }
+
+    const handleSeekChange = e => {
+        setPlayed(parseFloat(e.target.value))
+        ref.current.seekTo(parseFloat(e.target.value))
+    }
+
+
     const handleVolumeChange = e => {
         setVolume(parseFloat(e.target.value))
         handleSetVolumeIcon(parseFloat(e.target.value))
@@ -101,6 +114,7 @@ export const Footer = () => {
 
     return (
         <FooterLayout 
+        played={played}
         url={url}
         pip={pip}
         playing={playOrNot}
@@ -114,9 +128,12 @@ export const Footer = () => {
         loop={loop}
         showRemaining={showRemaining}
         volumeIcon={volumeIcon}
+        ref={ref}
 
         handlePlayPause={handlePlayPause}
         handleToggleLoop={handleToggleLoop}
+        handleProgress={handleProgress}
+        handleSeekChange={handleSeekChange}
         handleVolumeChange={handleVolumeChange}
         handleToggleMuted={handleToggleMuted}
         handlePlay={handlePlay}
