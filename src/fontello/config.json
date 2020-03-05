@@ -107,6 +107,42 @@
       "css": "dot-3",
       "code": 59393,
       "src": "entypo"
+    },
+    {
+      "uid": "8489d61496923b1159b01d8a0a7b2df0",
+      "css": "volume-off",
+      "code": 59396,
+      "src": "elusive"
+    },
+    {
+      "uid": "5d9730dc93976d27eb07914eab50a507",
+      "css": "volume-down",
+      "code": 59397,
+      "src": "elusive"
+    },
+    {
+      "uid": "b59b3b618699b467541f631edd5a02ed",
+      "css": "volume",
+      "code": 59407,
+      "src": "elusive"
+    },
+    {
+      "uid": "012ff5762ccb18c16bdfdd6baf187406",
+      "css": "volume-up",
+      "code": 59408,
+      "src": "elusive"
+    },
+    {
+      "uid": "39e2e6682c28e1e3b5f49825a19717c4",
+      "css": "note",
+      "code": 59409,
+      "src": "entypo"
+    },
+    {
+      "uid": "598a5f2bcf3521d1615de8e1881ccd17",
+      "css": "clock",
+      "code": 59410,
+      "src": "fontawesome"
     }
   ]
 }

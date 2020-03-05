@@ -3,6 +3,8 @@
 .icon-dot-3:before { content: '\e801'; } /* '' */
 .icon-home:before { content: '\e802'; } /* '' */
 .icon-shuffle:before { content: '\e803'; } /* '' */
+.icon-volume-off:before { content: '\e804'; } /* '' */
+.icon-volume-down:before { content: '\e805'; } /* '' */
 .icon-pause:before { content: '\e806'; } /* '' */
 .icon-play:before { content: '\e807'; } /* '' */
 .icon-to-start:before { content: '\e808'; } /* '' */
@@ -12,6 +14,10 @@
 .icon-heart-empty:before { content: '\e80c'; } /* '' */
 .icon-calendar-outlilne:before { content: '\e80d'; } /* '' */
 .icon-plus:before { content: '\e80e'; } /* '' */
+.icon-volume:before { content: '\e80f'; } /* '' */
+.icon-volume-up:before { content: '\e810'; } /* '' */
+.icon-note:before { content: '\e811'; } /* '' */
+.icon-clock:before { content: '\e812'; } /* '' */
 .icon-right-open:before { content: '\f006'; } /* '' */
 .icon-left-open:before { content: '\f007'; } /* '' */
 .icon-folder-empty:before { content: '\f114'; } /* '' */
