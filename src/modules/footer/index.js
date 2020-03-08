@@ -3,8 +3,9 @@ import React, {useState, useCallback, useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {playOrStop, NowPlayedSong} from '../../store/currentItems/selectors'
+import {songsArrayToPlay} from '../../store/fetchSongs/selectors'
 
-import {handlePlayOrStop} from '../../store/currentItems/actions';
+import {handlePlayOrStop, handlePlayThisSong} from '../../store/currentItems/actions';
 
 import {FooterLayout} from './layout'
 
@@ -12,6 +13,9 @@ export const Footer = () => {
 
     const playOrNot = useSelector(playOrStop)
     const currentPlayedSong = useSelector(NowPlayedSong)
+    const songsArr = useSelector(songsArrayToPlay)
+
+    console.log(songsArr)
 
     const dispatch = useDispatch()
 
@@ -79,9 +83,12 @@ export const Footer = () => {
         dispatch(handlePlayOrStop({ play: false }))
     }, [])
     
-    const handleEnded = useCallback(event => () => {
+    const handleEnded = useCallback(event => {
         console.log('onEnded')
-        dispatch(handlePlayOrStop({ play: false }))
+        let song = songsArr.results[7]
+        console.log(song)
+        /* dispatch(handlePlayThisSong({ song })) */
+        /* dispatch(handlePlayOrStop({ play: false })) */
     }, [])
     
     const handleDuration = duration => {
