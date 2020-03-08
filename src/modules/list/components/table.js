@@ -20,12 +20,12 @@ export const Table = ({songs, loading, error, favList, handleFetchSongs, current
                         song={song}
                         favList={favList}
                         id={i++}
+                        playOrNot={playOrNot}
 
                         currentSongName={currentSongName}
                         handleAddSongToFav={handleAddSongToFav}
                         handleDeleteSongFromFav={handleDeleteSongFromFav}
                         handleSetCurrentSong={handleSetCurrentSong}
-                        handlePlayThisSongNow={handlePlayThisSongNow}
                         handlePlayStopIcon={handlePlayStopIcon}
                         NowIsPlaying={NowIsPlaying}
                     />

@@ -1,12 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
 import Duration from '../../../helpers/Duration'
 
+import {handlePlayOrStop, handlePlayThisSong} from '../../../store/currentItems/actions';
+import {useDispatch} from 'react-redux';
+
 import {ListItemContainer} from './listItem.styled'
 
-export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, favList, handlePlayStopIcon, NowIsPlaying}) => {
+export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, favList, NowIsPlaying, playOrNot}) => {
 
     const [favChecked, setFavChecked] = useState(false)
+    const [playingThisSongNow, setPlayingThisSongNow] = useState(false)
+    const [showPlayButton, setShowPlayButton] = useState(false)
+
+    const dispatch = useDispatch()
 
     const handleOnClick = (song, id) => {
         if (favChecked === false) {
@@ -18,6 +25,36 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
         }
     }
 
+    const handleOnMouseEnter = useCallback(event => {
+        setShowPlayButton(true)
+    }, [showPlayButton])
+
+    const handleOnMouseLeave = useCallback(event => {
+        if (playingThisSongNow) {
+            setShowPlayButton(true)
+        } else {
+            setShowPlayButton(false)
+        }
+    }, [showPlayButton, playingThisSongNow])
+
+    const handlePlayThisSongNow = useCallback(event => {
+        if (NowIsPlaying.previewUrl === song.previewUrl) {
+            if (playOrNot === true) {
+                dispatch(handlePlayOrStop({ play: false }))
+                setPlayingThisSongNow(false)
+                setShowPlayButton(true)
+            } else {
+                dispatch(handlePlayOrStop({ play: true }))
+                setPlayingThisSongNow(true)
+                setShowPlayButton(true)
+            }
+        } else {
+            dispatch(handlePlayThisSong({ song }))
+            setPlayingThisSongNow(true)
+            setShowPlayButton(true)
+        }
+    }, [currentSongName])
+
     useEffect(() => {
         favList.map(favListItem => {
             if (favListItem.song.previewUrl === song.previewUrl)
@@ -25,16 +62,42 @@ export const ListItem = ({song, currentSongName, handleAddSongToFav, handleDelet
         });
     }, []);
 
+    useEffect(() => {
+        if (NowIsPlaying.previewUrl === song.previewUrl) {
+            if (playOrNot === true) {
+                setShowPlayButton(true)
+                setPlayingThisSongNow(true)
+            } else if (playOrNot === false) {
+                setShowPlayButton(true)
+                setPlayingThisSongNow(false)
+            }
+        } else {
+            setShowPlayButton(false)
+            setPlayingThisSongNow(false)
+        }
+    }, [NowIsPlaying, playOrNot, playingThisSongNow]);
+
+    useEffect(() => {
+        NowIsPlaying.previewUrl !== song.previewUrl ? 
+        setPlayingThisSongNow(false) : 
+        setPlayingThisSongNow(true)
+    }, [showPlayButton]);
+
     return (
             <ListItemContainer>
             <div className="row"
-                onClick={handleSetCurrentSong(song)}>
+                onClick={handleSetCurrentSong(song)}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={handleOnMouseLeave}>
                     <div className="playStopIconBorder"
                         style={{backgroundColor: currentSongName.song.previewUrl === song.previewUrl  ? "#ffffff10" : "transparent"}}
-                        onClick={handlePlayThisSongNow(song)}
+                        onClick={handlePlayThisSongNow}
                         >
-                            <div className="playStopIcon">
+                            <div className="playStopIcon" style={{visibility: showPlayButton ? 'visible' : 'hidden'}}>
+                                {playingThisSongNow ?
+                                <i className="icon-pause"/> :
                                 <i className="icon-play"/>
+                                }
                             </div>
                     </div>
                     <div className="favo" 

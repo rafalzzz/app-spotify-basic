@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const ListContainer = styled.div`
-background-color: transparent;
-height: 40%;
+/* background-color: transparent; */
+background-color: #121212;
+height: 100%;
 width: calc(100% - 158px);
 color: #ffffff;
 position: absolute;

@@ -1,21 +1,88 @@
-import React from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
 import Duration from '../../../helpers/Duration'
 
+import {handlePlayOrStop, handlePlayThisSong} from '../../../store/currentItems/actions';
+import {useDispatch} from 'react-redux';
+
 import {FavListItemContainer} from './favListItem.styled'
 
-export const FavListItem = ({favListItem, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying}) => {
+export const FavListItem = ({favListItem, handleDeleteSongFromFav, handleSetCurrentSong, currentSongName, NowIsPlaying, playOrNot}) => {
+
+    const [playingThisSongNow, setPlayingThisSongNow] = useState(false)
+    const [showPlayButton, setShowPlayButton] = useState(false)
+
+    const dispatch = useDispatch()
+
+    const handleOnMouseEnter = useCallback(event => {
+        setShowPlayButton(true)
+    }, [showPlayButton])
+
+    const handleOnMouseLeave = useCallback(event => {
+        if (playingThisSongNow) {
+            setShowPlayButton(true)
+        } else {
+            setShowPlayButton(false)
+        }
+    }, [showPlayButton, playingThisSongNow])
+
+    const handlePlayThisSongNow = useCallback(event => {
+        if (NowIsPlaying.previewUrl === favListItem.song.previewUrl) {
+            if (playOrNot === true) {
+                dispatch(handlePlayOrStop({ play: false }))
+                setPlayingThisSongNow(false)
+                setShowPlayButton(true)
+            } else {
+                dispatch(handlePlayOrStop({ play: true }))
+                setPlayingThisSongNow(true)
+                setShowPlayButton(true)
+            }
+        } else {
+            let song = favListItem.song
+            dispatch(handlePlayThisSong({ song }))
+            setPlayingThisSongNow(true)
+            setShowPlayButton(true)
+        }
+    }, [currentSongName])
+
+    useEffect(() => {
+        if (NowIsPlaying.previewUrl === favListItem.song.previewUrl) {
+            if (playOrNot === true) {
+                setShowPlayButton(true)
+                setPlayingThisSongNow(true)
+            } else if (playOrNot === false) {
+                setShowPlayButton(true)
+                setPlayingThisSongNow(false)
+            }
+        } else {
+            setShowPlayButton(false)
+            setPlayingThisSongNow(false)
+        }
+    }, [NowIsPlaying, playOrNot, playingThisSongNow]);
+
+    useEffect(() => {
+        NowIsPlaying.previewUrl !== favListItem.song.previewUrl ? 
+        setPlayingThisSongNow(false) : 
+        setPlayingThisSongNow(true)
+    }, [showPlayButton]);
+
+    console.log(favListItem)
 
     return (
             <FavListItemContainer>
                 <div className="row"
-                onClick={handleSetCurrentSong(favListItem.song)}>
+                onClick={handleSetCurrentSong(favListItem.song)}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={handleOnMouseLeave}>
                     <div className="playStopIconBorder"
                         style={{backgroundColor: currentSongName.song.previewUrl === favListItem.song.previewUrl  ? "#ffffff10" : "transparent"}}
-                        onClick={handlePlayThisSongNow(favListItem.song)}
+                        onClick={handlePlayThisSongNow}
                         >
-                            <div className="playStopIcon">
+                            <div className="playStopIcon" style={{visibility: showPlayButton ? 'visible' : 'hidden'}}>
+                                {playingThisSongNow ?
+                                <i className="icon-pause"/> :
                                 <i className="icon-play"/>
+                                }
                             </div>
                     </div>
                     <div className="favo" 

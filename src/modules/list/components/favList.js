@@ -4,7 +4,7 @@ import {FavListContainer} from './favList.styled'
 import {TableHeader} from './tableHeader'
 import {FavListItem} from './favListItem'
 
-export const FavList = ({favList, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying}) => {
+export const FavList = ({favList, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying, playOrNot}) => {
 
     return (    
     <FavListContainer>
@@ -14,6 +14,7 @@ export const FavList = ({favList, handleDeleteSongFromFav, handleSetCurrentSong,
                 <div key={i++}>
                     <FavListItem
                         favListItem={favListItem}
+                        playOrNot={playOrNot}
 
                         handleDeleteSongFromFav={handleDeleteSongFromFav}
 

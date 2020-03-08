@@ -8,18 +8,44 @@ height: 200px;
 .album {
     width: 176px;
     height: 176px;
-    background-color: white;
+    /* background-color: white; */
     float: left;
     margin-left: 29px;
     margin-top: 7px;
 }
 
+img {
+    width: 176px;
+    height: 176px;
+}
+
 p {
     font-size: 2.5em;
+    position: absolute;
     float: left;
     margin-top: 44px;
-    margin-left: 20px;
+    margin-left: 226px;
     font-weight: 700;
+    margin-bottom: 0px;
+}
+
+.title {
+    font-size: 1em;
+    position: absolute;
+    float: left;
+    margin-top: 95px;
+    margin-left: 228px;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+
+.artist {
+    font-size: 0.8em;
+    position: absolute;
+    float: left;
+    margin-top: 118px;
+    margin-left: 228px;
+    font-weight: 300;
     margin-bottom: 0px;
 }
 

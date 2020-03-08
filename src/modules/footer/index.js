@@ -29,7 +29,7 @@ export const Footer = () => {
     const [showRemaining, setShowRemaining] = useState(false)
     const [volumeIcon, setVolumeIcon] = useState("icon-volume-up")
 
-    const setSongUrl = useCallback((songUrl) => {
+    const setSongUrl = useCallback(songUrl => {
         setUrl(currentPlayedSong.previewUrl)
     }, [currentPlayedSong.previewUrl])
 

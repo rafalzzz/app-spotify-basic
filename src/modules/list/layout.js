@@ -11,7 +11,7 @@ import {Table} from './components/table';
 import {FavList} from './components/favList'
 import {Playlist} from './components/playlist'
 
-export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, currentSongName, currentPlaylistName, playOrNot, handlePlayPause, handleOpenMoreOptions, handleCloseMoreOptions, handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, handlePlayStopIcon, NowIsPlaying, returnCurrentPlaylistSongs, songs, loading, error, favList, currentPlaylistSongsList}) => (
+export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, currentSongName, currentPlaylistName, playOrNot, handlePlayPause, favListIsOpen, handleOpenFavList, handleCloseFavList, handleOpenMoreOptions, handleCloseMoreOptions, handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, handlePlayStopIcon, NowIsPlaying, returnCurrentPlaylistSongs, songs, loading, error, favList, currentPlaylistSongsList}) => (
     <ListContainer>
         <SearchBar
             handleOnChange={handleOnChange}
@@ -23,6 +23,10 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
         </Route>
         <Route path="/user/main">
             <ListHeader
+                favListIsOpen={favListIsOpen}
+                handleOpenFavList={handleOpenFavList}
+                handleCloseFavList={handleCloseFavList}
+
                 moreOptionsIsOpen={moreOptionsIsOpen}
                 handleOpenMoreOptions={handleOpenMoreOptions}
 
@@ -43,6 +47,7 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
                 loading={loading}
                 error={error}
                 favList={favList}
+                playOrNot={playOrNot}
 
                 currentSongName={currentSongName}
                 handleAddSongToFav={handleAddSongToFav}
@@ -55,6 +60,10 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
         </Route>
         <Route path="/user/favourite-list">
             <ListHeader
+                favListIsOpen={favListIsOpen}
+                handleOpenFavList={handleOpenFavList}
+                handleCloseFavList={handleCloseFavList}
+
                 moreOptionsIsOpen={moreOptionsIsOpen}
                 handleOpenMoreOptions={handleOpenMoreOptions}
 
@@ -72,6 +81,7 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
             <FavList
                 favList={favList}
                 handleDeleteSongFromFav={handleDeleteSongFromFav}
+                playOrNot={playOrNot}
 
                 handleSetCurrentSong={handleSetCurrentSong}
                 handlePlayThisSongNow={handlePlayThisSongNow}
@@ -81,6 +91,10 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
         </Route>
         <Route path="/user/playlist">
             <ListHeader
+                favListIsOpen={favListIsOpen}
+                handleOpenFavList={handleOpenFavList}
+                handleCloseFavList={handleCloseFavList}
+
                 moreOptionsIsOpen={moreOptionsIsOpen}
                 handleOpenMoreOptions={handleOpenMoreOptions}
 
@@ -105,6 +119,7 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
                 currentSongName={currentSongName}
                 NowIsPlaying={NowIsPlaying}
                 favList={favList}
+                playOrNot={playOrNot}
 
                 returnCurrentPlaylistSongs={returnCurrentPlaylistSongs}
                 currentPlaylistSongsList={currentPlaylistSongsList}

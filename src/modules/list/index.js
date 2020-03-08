@@ -1,8 +1,10 @@
-import React, {useState, useEffect, useCallback, memo} from 'react';
+import React, {useState, useCallback, memo} from 'react';
 
 import firebase, {db} from '../../common/firebase'
 
 import {useSelector, useDispatch} from 'react-redux';
+
+import { useHistory } from "react-router-dom";
 
 import {songsArray, loadingSongs, isError} from '../../store/fetchSongs/selectors';
 import {favSongsList} from '../../store/favSongs/selectors';
@@ -20,6 +22,7 @@ export const List = memo(() => {
 
   const [term, setTerm] = useState('');
   const [moreOptionsIsOpen, setMoreOptionsIsOpen] = useState(false)
+  const [favListIsOpen, setFavListIsOpen] = useState(false)
   const [currentPlaylistSongsList, setCurrentPlaylistSongsList] = useState([])
 
   const dispatch = useDispatch()
@@ -109,15 +112,15 @@ export const List = memo(() => {
       })
       .catch(function(error) {
           console.error("Error writing document: ", error);
-      });
-  }, []);
+      })
+  }, [])
 
   // Playlists functions
 
   console.log(currentPlaylistName)
 
   const handleAddSongToPlaylist = useCallback((playlist, song) => event => {
-    dispatch(addSongToPlaylist({ playlistName: playlist, song: song }));
+    dispatch(addSongToPlaylist({ playlistName: playlist, song: song }))
 
     db.collection("playlists").doc(playlist).update({
       name: playlist,
@@ -128,13 +131,13 @@ export const List = memo(() => {
     })
     .catch(function(error) {
         console.error("Error writing playlist: ", error);
-    });
+    })
 
-
+    setMoreOptionsIsOpen(false)
   }, []);
 
   const handleDeleteSongFromPlaylist = useCallback((playlist, song) => event => {
-    dispatch(deleteSongFromPlaylist({ playlistName: playlist, song: song }));
+    dispatch(deleteSongFromPlaylist({ playlistName: playlist, song: song }))
 
     db.collection("playlists").doc(playlist).update({
       songs: firebase.firestore.FieldValue.arrayRemove(song)
@@ -144,7 +147,9 @@ export const List = memo(() => {
     })
     .catch(function(error) {
         console.error("Error writing playlist: ", error);
-    });
+    })
+
+    setMoreOptionsIsOpen(false)
   }, []);
 
   const handleDeletePlaylist = useCallback(name => event => {
@@ -152,10 +157,12 @@ export const List = memo(() => {
 
     db.collection("playlists").doc(name).delete().then(() => {
       console.log("Playlist successfully deleted!");
-  }).catch(function(error) {
-      console.error("Error removing playlist: ", error);
-  });
-  }, []);
+    }).catch(function(error) {
+        console.error("Error removing playlist: ", error);
+    })
+
+  setMoreOptionsIsOpen(false)
+  }, [])
 
   // CurrentItems functions
 
@@ -163,36 +170,40 @@ export const List = memo(() => {
     dispatch(setCurrentSong({ song }));
   }, []);
 
-  const handlePlayThisSongNow = useCallback(song => event => {
-    if (NowIsPlaying.previewUrl !== song.previewUrl) {
-      dispatch(handlePlayThisSong({ song }))
-      dispatch(setCurrentSong({ song }))
-    } else if (NowIsPlaying.previewUrl === song.previewUrl) {
-      dispatch(handlePlayOrStop({ play: false }))
-    }
-  }, [])
+  // Redirect to FavList function
 
-  const handlePlayStopIcon = useCallback(song => event => {
-    NowIsPlaying.previewUrl === song.previewUrl ?
-    handlePlayPause()
-    :
-    handlePlayThisSongNow(song)
-  }, [])
+  let history = useHistory()
+
+  const handleOpenFavList = useCallback(event => {
+    console.log('asdsad')
+    history.push("/user/favourite-list")
+    setFavListIsOpen(true)
+  }, []);
+
+  const handleCloseFavList = useCallback(event => {
+    console.log('asdsad')
+    history.push("/user/main")
+    setFavListIsOpen(false)
+  }, []);
 
   // Other functions
 
   const handleOpenMoreOptions = useCallback(event => () => {
-    setMoreOptionsIsOpen(true);
+    setMoreOptionsIsOpen(true)
   }, []);
 
   const handleCloseMoreOptions = useCallback(event => () => {
-    setMoreOptionsIsOpen(false);
+    setMoreOptionsIsOpen(false)
   }, []);
 
     return (
         <ListLayout
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
+
+          favListIsOpen={favListIsOpen}
+          handleOpenFavList={handleOpenFavList}
+          handleCloseFavList={handleCloseFavList}
 
           moreOptionsIsOpen={moreOptionsIsOpen}
           handleOpenMoreOptions={handleOpenMoreOptions}
@@ -213,8 +224,7 @@ export const List = memo(() => {
           handleAddSongToFav={handleAddSongToFav}
           handleDeleteSongFromFav={handleDeleteSongFromFav}
           handleSetCurrentSong={handleSetCurrentSong}
-          handlePlayThisSongNow={handlePlayThisSongNow}
-          handlePlayStopIcon={handlePlayStopIcon}
+          handlePlayStopIcon={handlePlayPause}
           NowIsPlaying={NowIsPlaying}
 
           returnCurrentPlaylistSongs={returnCurrentPlaylistSongs}
