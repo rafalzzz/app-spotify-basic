@@ -87,7 +87,7 @@ export const ListItem = ({
     [currentSongName]
   );
 
-  // Show songs added to favList function
+  // Show songs added to favList
 
   useEffect(() => {
     favList.map(favListItem => {
@@ -95,7 +95,7 @@ export const ListItem = ({
     });
   }, []);
 
-  // Show Play/Stop icon current playing song function
+  // Show Play/Stop icon current playing song
 
   useEffect(() => {
     if (NowIsPlaying.previewUrl === song.previewUrl) {
@@ -112,7 +112,7 @@ export const ListItem = ({
     }
   }, [NowIsPlaying, playOrNot, playingThisSongNow]);
 
-  // Show current playing song function
+  // Show current playing song
 
   useEffect(() => {
     NowIsPlaying.previewUrl !== song.previewUrl
