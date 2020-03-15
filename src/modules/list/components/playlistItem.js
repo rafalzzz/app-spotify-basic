@@ -2,12 +2,12 @@ import React, {useState, useEffect, useCallback} from 'react';
 
 import Duration from '../../../helpers/Duration'
 
-import {handlePlayOrStop, handlePlayThisSong} from '../../../store/currentItems/actions';
+import {setCurrentIndex, handlePlayOrStop, handlePlayThisSong} from '../../../store/currentItems/actions';
 import {useDispatch} from 'react-redux';
 
 import {PlaylistItemContainer} from './playlistItem.styled'
 
-export const PlaylistItem = ({playlistSong, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, currentSongName, NowIsPlaying, favList, playOrNot}) => {
+export const PlaylistItem = ({playlistSong, id, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, currentSongName, NowIsPlaying, favList, playOrNot}) => {
 
     const [favChecked, setFavChecked] = useState(false)
     const [playingThisSongNow, setPlayingThisSongNow] = useState(false)
@@ -43,16 +43,19 @@ export const PlaylistItem = ({playlistSong, handleAddSongToFav, handleDeleteSong
                 dispatch(handlePlayOrStop({ play: false }))
                 setPlayingThisSongNow(false)
                 setShowPlayButton(true)
+                dispatch(setCurrentIndex({ id }))
             } else {
                 dispatch(handlePlayOrStop({ play: true }))
                 setPlayingThisSongNow(true)
                 setShowPlayButton(true)
+                dispatch(setCurrentIndex({ id }))
             }
         } else {
             let song = playlistSong
             dispatch(handlePlayThisSong({ song }))
             setPlayingThisSongNow(true)
             setShowPlayButton(true)
+            dispatch(setCurrentIndex({ id }))
         }
     }, [currentSongName])
 

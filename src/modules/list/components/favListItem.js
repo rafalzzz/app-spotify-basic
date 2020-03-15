@@ -2,12 +2,12 @@ import React, {useState, useEffect, useCallback} from 'react';
 
 import Duration from '../../../helpers/Duration'
 
-import {handlePlayOrStop, handlePlayThisSong} from '../../../store/currentItems/actions';
+import {setCurrentIndex, handlePlayOrStop, handlePlayThisSong} from '../../../store/currentItems/actions';
 import {useDispatch} from 'react-redux';
 
 import {FavListItemContainer} from './favListItem.styled'
 
-export const FavListItem = ({favListItem, handleDeleteSongFromFav, handleSetCurrentSong, currentSongName, NowIsPlaying, playOrNot}) => {
+export const FavListItem = ({favListItem, id, handleDeleteSongFromFav, handleSetCurrentSong, currentSongName, NowIsPlaying, playOrNot}) => {
 
     const [playingThisSongNow, setPlayingThisSongNow] = useState(false)
     const [showPlayButton, setShowPlayButton] = useState(false)
@@ -32,16 +32,19 @@ export const FavListItem = ({favListItem, handleDeleteSongFromFav, handleSetCurr
                 dispatch(handlePlayOrStop({ play: false }))
                 setPlayingThisSongNow(false)
                 setShowPlayButton(true)
+                dispatch(setCurrentIndex({ id }))
             } else {
                 dispatch(handlePlayOrStop({ play: true }))
                 setPlayingThisSongNow(true)
                 setShowPlayButton(true)
+                dispatch(setCurrentIndex({ id }))
             }
         } else {
             let song = favListItem.song
             dispatch(handlePlayThisSong({ song }))
             setPlayingThisSongNow(true)
             setShowPlayButton(true)
+            dispatch(setCurrentIndex({ id }))
         }
     }, [currentSongName])
 
@@ -65,9 +68,7 @@ export const FavListItem = ({favListItem, handleDeleteSongFromFav, handleSetCurr
         setPlayingThisSongNow(false) : 
         setPlayingThisSongNow(true)
     }, [showPlayButton]);
-
-    console.log(favListItem)
-
+    
     return (
             <FavListItemContainer>
                 <div className="row"

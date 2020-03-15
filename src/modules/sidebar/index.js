@@ -1,81 +1,35 @@
-import React, {useState, useCallback} from 'react';
+import React, { useCallback } from "react";
 
-import {db} from '../../common/firebase'
+import { useSelector, useDispatch } from "react-redux";
 
-import {useSelector, useDispatch} from 'react-redux';
+import { playlists } from "../../store/playlists/selectors";
+import { currentPlaylist } from "../../store/currentItems/selectors";
 
-import {playlists} from '../../store/playlists/selectors';
-import {currentPlaylist} from '../../store/currentItems/selectors';
+import { setCurrentPlaylist } from "../../store/currentItems/actions";
 
-import {createPlaylist} from '../../store/playlists/actions';
-import {setCurrentPlaylist} from '../../store/currentItems/actions';
-
-import {SidebarLayout} from './layout'
+import { SidebarLayout } from "./layout";
 
 export const Sidebar = () => {
-
-  const [playlistName, setPlaylistName] = useState("")
-  const [playlistFormIsOpen, setPlaylistFormIsOpen] = useState(false)
-
   const playlistsList = useSelector(playlists);
   const currentPlaylistName = useSelector(currentPlaylist);
 
-  console.log(playlistsList)
-  
   const dispatch = useDispatch();
 
-  const handlePlaylistForm = useCallback( event => () => {
-    setPlaylistFormIsOpen(!playlistFormIsOpen)
-  }, [])
-
-  const handlePlaylistName = (e) => {
-    e.preventDefault()
-    setPlaylistName(e.target.value)
-  }
-
-  const handleCreatePlaylist = useCallback((name) => {
-    dispatch(createPlaylist({ name }));
-
-    db.collection("playlists").doc(name).set({
-      name: name,
-      songs: []
-    })
-    .then(function() {
-      console.log("Playlist successfully created!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
-  }, []);
-
-  const handleOnSubmit = (e) => {
-    e.preventDefault()
-    if (playlistName === "") {
-      setPlaylistFormIsOpen(false)
-    } else if (playlistName !== "") {
-      handleCreatePlaylist(playlistName)
-      setPlaylistName("")
-      setPlaylistFormIsOpen(false)
-    }
-  };
-
-  const handleSetCurrentPlaylist = useCallback( name => event => {
-    dispatch(setCurrentPlaylist({ name }));
-    console.log(currentPlaylistName)
-  }, [])
+  const handleSetCurrentPlaylist = useCallback(
+    name => event => {
+      dispatch(setCurrentPlaylist({ name }));
+      console.log(currentPlaylistName);
+    },
+    []
+  );
 
   return (
     <div>
-        <SidebarLayout
-          playlists={playlistsList}
-          handleSetCurrentPlaylist={handleSetCurrentPlaylist}
-          currentPlaylistName={currentPlaylistName}
-
-          handleOnSubmit={handleOnSubmit}
-          playlistFormIsOpen={playlistFormIsOpen}
-          handlePlaylistForm={handlePlaylistForm}
-          handlePlaylistName={handlePlaylistName}
-        />
+      <SidebarLayout
+        playlists={playlistsList}
+        handleSetCurrentPlaylist={handleSetCurrentPlaylist}
+        currentPlaylistName={currentPlaylistName}
+      />
     </div>
   );
 };

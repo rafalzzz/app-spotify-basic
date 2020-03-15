@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const VolumeContainer = styled.div`
 float: right;
@@ -138,4 +138,4 @@ margin-right: 20px;
   input[type='range']:hover::-webkit-slider-thumb {
     box-shadow: -450px 0 0 450px #1ed760;
   }
-  `
+  `;

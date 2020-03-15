@@ -9,12 +9,12 @@ import { useHistory } from "react-router-dom";
 import {songsArray, loadingSongs, isError} from '../../store/fetchSongs/selectors';
 import {favSongsList} from '../../store/favSongs/selectors';
 import {playlists} from '../../store/playlists/selectors';
-import {currentSong, currentPlaylist, playOrStop, NowPlayedSong} from '../../store/currentItems/selectors';
+import {currentSong, currentIndex, currentPlaylist, playOrStop, NowPlayedSong} from '../../store/currentItems/selectors';
 
 import {fetchSongsStarted} from '../../store/fetchSongs/actions';
 import {addSongToFav, deleteSongFromFav} from '../../store/favSongs/actions';
 import {addSongToPlaylist, deleteSongFromPlaylist, deletePlaylist} from '../../store/playlists/actions';
-import {setCurrentSong, handlePlayOrStop, handlePlayThisSong} from '../../store/currentItems/actions';
+import {setCurrentCategory, setCurrentSong, handlePlayOrStop} from '../../store/currentItems/actions';
 
 import {ListLayout} from './layout'
 
@@ -38,7 +38,7 @@ export const List = memo(() => {
   
   const currentPlaylistSongs = useSelector(playlists)
 
-  console.log(currentPlaylistSongs)
+  /* console.log(currentPlaylistSongs) */
 
   const returnCurrentPlaylistSongs = () => {
     currentPlaylistSongs.map(playlist =>
@@ -48,9 +48,16 @@ export const List = memo(() => {
       null)
   }
   
-
   const currentPlaylistName = useSelector(currentPlaylist)
   const currentSongName = useSelector(currentSong)
+  const currentSongIndex = useSelector(currentIndex)
+  /* console.log(currentSongIndex) */
+
+  // Select category
+
+  const selectCategory = useCallback((term) => {
+    dispatch(setCurrentCategory({ term }));
+  }, []);
 
   // Searchbar functions
 
@@ -117,8 +124,6 @@ export const List = memo(() => {
 
   // Playlists functions
 
-  console.log(currentPlaylistName)
-
   const handleAddSongToPlaylist = useCallback((playlist, song) => event => {
     dispatch(addSongToPlaylist({ playlistName: playlist, song: song }))
 
@@ -166,9 +171,10 @@ export const List = memo(() => {
 
   // CurrentItems functions
 
-  const handleSetCurrentSong = useCallback(song => event => {
+  const handleSetCurrentSong = useCallback((song) => event => {
     dispatch(setCurrentSong({ song }));
-  }, []);
+    /* dispatch(setCurrentIndex({ index })); */
+  }, [currentSongIndex]);
 
   // Redirect to FavList function
 
@@ -198,6 +204,8 @@ export const List = memo(() => {
 
     return (
         <ListLayout
+          selectCategory={selectCategory}
+
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
 
@@ -213,7 +221,6 @@ export const List = memo(() => {
 
           playOrNot={playOrNot}
           handlePlayPause={handlePlayPause}
-
 
           handleCloseMoreOptions={handleCloseMoreOptions}
           handleAddSongToPlaylist={handleAddSongToPlaylist}

@@ -11,7 +11,7 @@ import {Table} from './components/table';
 import {FavList} from './components/favList'
 import {Playlist} from './components/playlist'
 
-export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, currentSongName, currentPlaylistName, playOrNot, handlePlayPause, favListIsOpen, handleOpenFavList, handleCloseFavList, handleOpenMoreOptions, handleCloseMoreOptions, handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, handlePlayStopIcon, NowIsPlaying, returnCurrentPlaylistSongs, songs, loading, error, favList, currentPlaylistSongsList}) => (
+export const ListLayout = ({selectCategory, handleOnChange, handleOnSubmit, moreOptionsIsOpen, currentSongName, currentPlaylistName, playOrNot, handlePlayPause, favListIsOpen, handleOpenFavList, handleCloseFavList, handleOpenMoreOptions, handleCloseMoreOptions, handleAddSongToPlaylist, handleDeleteSongFromPlaylist, handleDeletePlaylist, handleFetchSongs, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, handlePlayStopIcon, NowIsPlaying, returnCurrentPlaylistSongs, songs, loading, error, favList, currentPlaylistSongsList}) => (
     <ListContainer>
         <SearchBar
             handleOnChange={handleOnChange}
@@ -42,6 +42,7 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
                 handleDeletePlaylist={handleDeletePlaylist}
             />
             <Table
+                selectCategory={selectCategory}
                 handleFetchSongs={handleFetchSongs}
                 songs={songs}
                 loading={loading}
@@ -79,6 +80,7 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
                 handleDeletePlaylist={handleDeletePlaylist}
             />
             <FavList
+                selectCategory={selectCategory}
                 favList={favList}
                 handleDeleteSongFromFav={handleDeleteSongFromFav}
                 playOrNot={playOrNot}
@@ -110,7 +112,7 @@ export const ListLayout = ({handleOnChange, handleOnSubmit, moreOptionsIsOpen, c
                 handleDeletePlaylist={handleDeletePlaylist}
             />
             <Playlist
-
+                selectCategory={selectCategory}
                 handleAddSongToFav={handleAddSongToFav}
                 handleDeleteSongFromFav={handleDeleteSongFromFav}
 

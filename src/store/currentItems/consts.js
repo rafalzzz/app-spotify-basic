@@ -1,4 +1,9 @@
 export const CURRENT_SONG = 'CURRENT_SONG';
+export const CURRENT_INDEX = 'CURRENT_INDEX';
+export const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
 export const CURRENT_PLAYLIST = 'CURRENT_PLAYLIST';
 export const PLAY_OR_STOP = "PLAY_OR_STOP"
+export const SHUFFLE = "SHUFFLE"
 export const PLAY_THIS_SONG = "PLAY_THIS_SONG"
+export const PLAY_NEXT_SONG = "PLAY_NEXT_SONG"
+export const PLAY_PREV_SONG = "PLAY_PREV_SONG"

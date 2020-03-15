@@ -52,6 +52,10 @@ justify-content: space-between;
   padding-left: 1px;
 }
 
+.icon:hover {
+  color: white;
+}
+
 .iconLeft {
   height: 23px;
   width: 30px;

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {FavListContainer} from './favList.styled'
 import {TableHeader} from './tableHeader'
 import {FavListItem} from './favListItem'
 
-export const FavList = ({favList, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying, playOrNot}) => {
+export const FavList = ({selectCategory, favList, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying, playOrNot}) => {
+
+    useEffect(() => {
+        selectCategory('favList')
+      }, []);
 
     return (    
     <FavListContainer>
@@ -14,6 +18,7 @@ export const FavList = ({favList, handleDeleteSongFromFav, handleSetCurrentSong,
                 <div key={i++}>
                     <FavListItem
                         favListItem={favListItem}
+                        id={i++}
                         playOrNot={playOrNot}
 
                         handleDeleteSongFromFav={handleDeleteSongFromFav}

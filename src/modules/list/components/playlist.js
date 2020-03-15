@@ -4,9 +4,10 @@ import {PlaylistContainer} from './playlist.styled'
 import {TableHeader} from './tableHeader'
 import {PlaylistItem} from './playlistItem'
 
-export const Playlist = ({handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying, favList, currentPlaylistSongsList, returnCurrentPlaylistSongs}) => {
+export const Playlist = ({selectCategory, handleAddSongToFav, handleDeleteSongFromFav, handleSetCurrentSong, handlePlayThisSongNow, currentSongName, NowIsPlaying, favList, currentPlaylistSongsList, returnCurrentPlaylistSongs}) => {
 
     useEffect(() => {
+        selectCategory('playlist')
         returnCurrentPlaylistSongs()
     }, [])
 
@@ -18,6 +19,7 @@ export const Playlist = ({handleAddSongToFav, handleDeleteSongFromFav, handleSet
                 <div key={i++}>
                     <PlaylistItem
                         playlistSong={playlistSong}
+                        id={i++}
 
                         handleAddSongToFav={handleAddSongToFav}
                         handleDeleteSongFromFav={handleDeleteSongFromFav}
