@@ -28,6 +28,8 @@ export const ListItem = ({
 
   const dispatch = useDispatch();
 
+  // FavSongs functions
+
   const handleOnClick = (song, id) => {
     if (favChecked === false) {
       handleAddSongToFav(song);
@@ -38,6 +40,8 @@ export const ListItem = ({
       setFavChecked(false);
     }
   };
+
+  // Show/Hide Play/Stop Icon functions
 
   const handleOnMouseEnter = useCallback(
     event => {
@@ -56,6 +60,8 @@ export const ListItem = ({
     },
     [showPlayButton, playingThisSongNow]
   );
+
+  // Play this song functions
 
   const handlePlayThisSongNow = useCallback(
     event => {
@@ -81,11 +87,15 @@ export const ListItem = ({
     [currentSongName]
   );
 
+  // Show songs added to favList function
+
   useEffect(() => {
     favList.map(favListItem => {
       if (favListItem.song.previewUrl === song.previewUrl) setFavChecked(true);
     });
   }, []);
+
+  // Show Play/Stop icon current playing song function
 
   useEffect(() => {
     if (NowIsPlaying.previewUrl === song.previewUrl) {
@@ -101,6 +111,8 @@ export const ListItem = ({
       setPlayingThisSongNow(false);
     }
   }, [NowIsPlaying, playOrNot, playingThisSongNow]);
+
+  // Show current playing song function
 
   useEffect(() => {
     NowIsPlaying.previewUrl !== song.previewUrl
