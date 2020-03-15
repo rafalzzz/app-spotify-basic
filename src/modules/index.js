@@ -7,7 +7,7 @@ import firebase, { auth } from "../common/firebase";
 import { Login } from "./loginPanel/index";
 import { LogoutMenu } from "./logoutMenu/layout";
 import { Sidebar } from "./sidebar/index";
-import { List } from "./list/index";
+import { Main } from "./main/index";
 import { Footer } from "./footer/index";
 
 export const Layout = () => {
@@ -42,7 +42,7 @@ export const Layout = () => {
         <Route path="/user/">
           <LogoutMenu handleSignOut={handleSignOut} username={user} />
           <Sidebar />
-          <List />
+          <Main />
           <Footer />
         </Route>
       </Switch>
