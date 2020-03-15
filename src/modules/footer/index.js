@@ -56,7 +56,6 @@ export const Footer = () => {
 
   // Loop consts
 
-  /* const [songIndex, setSongIndex] = useState(0) */
   const [currentPlaylistSongsList, setCurrentPlaylistSongsList] = useState([]);
 
   //FetchSongs consts
