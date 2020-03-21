@@ -22,20 +22,24 @@ import {
   shuffle,
   NowPlayedSong
 } from "../../../../store/currentItems/selectors";
+
 import {
   songsArray,
   songsArrayLength
 } from "../../../../store/fetchSongs/selectors";
+
 import { favSongsList } from "../../../../store/favSongs/selectors";
+
 import { playlists } from "../../../../store/playlists/selectors";
 
 import {
   handlePlayOrStop,
   handlePlayThisSong,
-  setCurrentIndex
+  setCurrentIndex,
+  handlePlayNextSong
 } from "../../../../store/currentItems/actions";
 
-export const ReactMusicPlayer = memo(() => {
+export const ReactMusicPlayer = () => {
   // Functions consts
   const shuffleSongs = useSelector(shuffle);
   const currentSongIndex = useSelector(currentIndex);
@@ -61,6 +65,10 @@ export const ReactMusicPlayer = memo(() => {
 
   const dispatch = useDispatch();
 
+  console.log("index", currentSongIndex);
+  console.log("tablica", favSongArr);
+  console.log("dlugosc tablicy", favSongArr.length);
+
   // ReactPlayer functions
 
   const handlePlay = useCallback(event => {
@@ -71,68 +79,43 @@ export const ReactMusicPlayer = memo(() => {
     dispatch(handlePlayOrStop({ play: false }));
   }, []);
 
-  const handleBuffer = useCallback(() => {
-    let newIndex = currentSongIndex + 1;
-    dispatch(setCurrentIndex({ id: newIndex }));
-  }, [currentSongIndex, category, currentPlayedSong]);
-
-  const handleStart = useCallback(() => {
-    /* if (shuffleSongs === true) {
-      let number = 0;
-      if (category === "favList") {
-        number = Math.floor(Math.random() * (favSongArr.length - 1) + 1);
-      } else if (category === "playlist") {
-        number = Math.floor(
-          Math.random() * (currentPlaylistSongsList.length - 1) + 1
-        );
-      } else {
-        number = Math.floor(Math.random() * (searchSongsArrLength - 1) + 1);
-      }
-      dispatch(setCurrentIndex({ id: number }));
-    } else {
-      if (
-        category === "search" &&
-        currentSongIndex === searchSongsArrLength - 1
-      ) {
-        dispatch(setCurrentIndex({ id: 1 }));
-      } else if (
-        category === "favList" &&
-        currentSongIndex === favSongArr.length - 1
-      ) {
-        dispatch(setCurrentIndex({ id: 1 }));
-      } else if (
-        category === "playlist" &&
-        currentSongIndex === currentPlaylistSongsList.length - 1
-      ) {
-        dispatch(setCurrentIndex({ id: 1 }));
-      } else {
-        dispatch(handlePlayNextSong({ value: 1 }));
-      }
-    } */
-  }, [
-    currentSongIndex,
-    searchSongsArr,
-    currentPlaylistSongsList,
-    category,
-    shuffleSongs
-  ]);
-
   const handleEnded = useCallback(() => {
-    console.log("On End");
-    let song = searchSongsArr[currentSongIndex];
     if (category === "search") {
-      song = searchSongsArr[currentSongIndex + 1];
+      if (currentSongIndex < searchSongsArrLength - 1) {
+        let song = searchSongsArr[currentSongIndex + 1];
+        dispatch(handlePlayThisSong({ song }));
+        dispatch(handlePlayNextSong({ value: 1 }));
+      } else {
+        let song = searchSongsArr[0];
+        dispatch(handlePlayThisSong({ song }));
+        dispatch(setCurrentIndex({ id: 0 }));
+      }
     } else if (category === "favList") {
-      song = favSongArr[currentSongIndex + 1].song;
+      if (currentSongIndex < favSongArr.length - 1) {
+        let song = favSongArr[currentSongIndex + 1].song;
+        dispatch(handlePlayThisSong({ song }));
+        dispatch(handlePlayNextSong({ value: 1 }));
+      } else {
+        let song = favSongArr[0].song;
+        dispatch(handlePlayThisSong({ song }));
+        dispatch(setCurrentIndex({ id: 0 }));
+      }
     } else if (category === "playlist") {
-      song = currentPlaylistSongsList[currentSongIndex + 1];
+      if (currentSongIndex < currentPlaylistSongsList.length - 1) {
+        let song = currentPlaylistSongsList[currentSongIndex + 1];
+        dispatch(handlePlayThisSong({ song }));
+        dispatch(handlePlayNextSong({ value: 1 }));
+      } else {
+        let song = currentPlaylistSongsList[0];
+        dispatch(handlePlayThisSong({ song }));
+        dispatch(setCurrentIndex({ id: 0 }));
+      }
     }
-
-    dispatch(handlePlayThisSong({ song }));
     dispatch(handlePlayOrStop({ play: true }));
   }, [
     currentSongIndex,
     searchSongsArr,
+    favSongArr,
     currentPlaylistSongsList,
     category,
     currentPlayedSong
@@ -141,6 +124,7 @@ export const ReactMusicPlayer = memo(() => {
   const ref = useRef(null);
 
   const handleProgress = value => {
+    console.log("obecnyIndex", currentSongIndex);
     let playedValue = parseFloat(value.played);
     dispatch(setPlayed({ played: playedValue }));
   };
@@ -153,6 +137,7 @@ export const ReactMusicPlayer = memo(() => {
 
   useEffect(() => {
     ref.current.seekTo(seekTo);
+    dispatch(setPlayed({ played: seekTo }));
   }, [seekTo]);
 
   // Get current playlist songs
@@ -181,13 +166,13 @@ export const ReactMusicPlayer = memo(() => {
       onReady={() => console.log("onReady")}
       onPlay={handlePlay}
       onPause={handlePause}
-      onBuffer={handleBuffer}
+      onBuffer={() => console.log("onBuffer")}
       onSeek={e => console.log("onSeek", e)}
-      onStart={handleStart}
+      onStart={() => console.log("onStart")}
       onEnded={handleEnded}
       onError={e => console.log("onError", e)}
       onProgress={handleProgress}
       onDuration={handleDuration}
     />
   );
-});
+};

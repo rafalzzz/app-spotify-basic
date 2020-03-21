@@ -25,7 +25,8 @@ import {
   handlePlayOrStop,
   handlePlayThisSong,
   setCurrentIndex,
-  setCurrentSong
+  handlePlayNextSong,
+  handlePlayPrevSong
 } from "../../../../store/currentItems/actions";
 
 import { setLoop } from "../../../../store/player/actions";
@@ -48,7 +49,7 @@ export const PlayerButtons = () => {
   const currentPlaylistSongs = useSelector(playlists);
   const currentPlaylistName = useSelector(currentPlaylist);
 
-  console.log("NowIsPlaying", currentPlayedSong);
+  console.log("Index -------", currentSongIndex);
 
   const dispatch = useDispatch();
 
@@ -58,7 +59,6 @@ export const PlayerButtons = () => {
         ? setCurrentPlaylistSongsList(playlist.songs)
         : null
     );
-    console.log("playlistArr", currentPlaylistSongsList);
   }, [currentPlaylistName]);
 
   const handleShuffleButton = useCallback(
@@ -66,49 +66,83 @@ export const PlayerButtons = () => {
       shuffleSongs
         ? dispatch(handleShuffle({ shuffle: false }))
         : dispatch(handleShuffle({ shuffle: true }));
-      console.log("asd", shuffleSongs);
     },
     [shuffleSongs]
   );
 
   const handlePreviewButton = useCallback(
     event => {
-      let song = searchSongsArr[currentSongIndex];
-      let newIndex = currentSongIndex;
-
-      if (currentSongIndex !== 0 && category === "search") {
-        song = searchSongsArr[currentSongIndex - 1];
-        newIndex = searchSongsArr.findIndex(
-          songArr => songArr.previewUrl === currentPlayedSong.previewUrl
-        );
-      } else if (currentSongIndex !== 0 && category === "favList") {
-        song = favSongArr[currentSongIndex - 1].song;
-        newIndex = searchSongsArr.findIndex(
-          songArr => songArr.previewUrl === currentPlayedSong.previewUrl
-        );
-      } else if (currentSongIndex !== 0 && category === "playlist") {
-        song = currentPlaylistSongsList[currentSongIndex - 1];
-        newIndex = searchSongsArr.findIndex(
-          songArr => songArr.previewUrl === currentPlayedSong.previewUrl
-        );
-      } else if (currentSongIndex === 0 && category === "search") {
-        return null;
-      } else if (currentSongIndex === 0 && category === "favList") {
-        return null;
-      } else if (currentSongIndex === 0 && category === "playlist") {
-        return null;
+      if (category === "search") {
+        if (currentSongIndex === 0) {
+          let song = searchSongsArr[searchSongsArrLength - 1];
+          let index = searchSongsArrLength;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: index }));
+        } else if (currentSongIndex > searchSongsArrLength - 1) {
+          let song = searchSongsArr[searchSongsArrLength - 1];
+          let index = searchSongsArrLength;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: index }));
+        } else if (currentSongIndex === searchSongsArrLength - 1) {
+          let song = searchSongsArr[currentSongIndex - 1];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayPrevSong({ value: 1 }));
+        } else {
+          let song = searchSongsArr[currentSongIndex - 1];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayPrevSong({ value: 1 }));
+        }
+      } else if (category === "favList") {
+        if (currentSongIndex === 0) {
+          let song = favSongArr[favSongArr.length - 1].song;
+          let index = favSongArr.length;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: index }));
+        } else if (currentSongIndex > favSongArr.length - 1) {
+          let song = favSongArr[favSongArr.length - 1].song;
+          let index = favSongArr.length;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: index }));
+        } else if (currentSongIndex === favSongArr.length - 1) {
+          let song = favSongArr[currentSongIndex - 1].song;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayPrevSong({ value: 1 }));
+        } else {
+          let song = favSongArr[currentSongIndex - 1].song;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayPrevSong({ value: 1 }));
+        }
+      } else if (category === "playlist") {
+        if (currentSongIndex === 0) {
+          let song =
+            currentPlaylistSongsList[currentPlaylistSongsList.length - 1];
+          let index = currentPlaylistSongsList.length;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: index }));
+        } else if (currentSongIndex > currentPlaylistSongsList.length - 1) {
+          let song =
+            currentPlaylistSongsList[currentPlaylistSongsList.length - 1];
+          let index = currentPlaylistSongsList.length;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: index }));
+        } else if (currentSongIndex === currentPlaylistSongsList.length - 1) {
+          let song = currentPlaylistSongsList[currentSongIndex - 1];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayPrevSong({ value: 1 }));
+        } else {
+          let song = currentPlaylistSongsList[currentSongIndex - 1];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayPrevSong({ value: 1 }));
+        }
       }
-
-      dispatch(handlePlayThisSong({ song }));
-      dispatch(setCurrentIndex({ id: newIndex }));
-      console.log(newIndex);
     },
     [
-      category,
       currentSongIndex,
-      currentPlayedSong,
+      searchSongsArr,
       favSongArr,
-      currentPlaylistSongsList
+      currentPlaylistSongsList,
+      category,
+      currentPlayedSong
     ]
   );
 
@@ -123,59 +157,45 @@ export const PlayerButtons = () => {
 
   const handleNextButton = useCallback(
     event => {
-      let song = searchSongsArr[currentSongIndex];
-      let newIndex = currentSongIndex;
-
       if (category === "search") {
-        song = searchSongsArr[currentSongIndex + 1];
-        newIndex = searchSongsArr.findIndex(
-          songArr => songArr.previewUrl === currentPlayedSong.previewUrl
-        );
-      } else if (
-        currentSongIndex !== favSongArr.length - 1 &&
-        category === "favList"
-      ) {
-        song = favSongArr[currentSongIndex + 1].song;
-        newIndex = searchSongsArr.findIndex(
-          songArr => songArr.previewUrl === currentPlayedSong.previewUrl
-        );
-      } else if (
-        currentSongIndex !== currentPlaylistSongsList.length - 1 &&
-        category === "playlist"
-      ) {
-        song = currentPlaylistSongsList[currentSongIndex + 1];
-        newIndex = searchSongsArr.findIndex(
-          songArr => songArr.previewUrl === currentPlayedSong.previewUrl
-        );
-      } else if (
-        currentSongIndex === searchSongsArrLength - 1 &&
-        category === "search"
-      ) {
-        song = searchSongsArr[currentSongIndex + 1];
-        newIndex = currentSongIndex + 1;
-      } else if (
-        currentSongIndex === favSongArr.length - 1 &&
-        category === "favList"
-      ) {
-        return null;
-      } else if (
-        currentSongIndex === currentPlaylistSongsList.length - 1 &&
-        category === "playlist"
-      ) {
-        return null;
+        if (currentSongIndex < searchSongsArrLength - 1) {
+          let song = searchSongsArr[currentSongIndex + 1];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayNextSong({ value: 1 }));
+        } else {
+          let song = searchSongsArr[0];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: 0 }));
+        }
+      } else if (category === "favList") {
+        if (currentSongIndex < favSongArr.length - 1) {
+          let song = favSongArr[currentSongIndex + 1].song;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayNextSong({ value: 1 }));
+        } else {
+          let song = favSongArr[0].song;
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: 0 }));
+        }
+      } else if (category === "playlist") {
+        if (currentSongIndex < currentPlaylistSongsList.length - 1) {
+          let song = currentPlaylistSongsList[currentSongIndex + 1];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(handlePlayNextSong({ value: 1 }));
+        } else {
+          let song = currentPlaylistSongsList[0];
+          dispatch(handlePlayThisSong({ song }));
+          dispatch(setCurrentIndex({ id: 0 }));
+        }
       }
-
-      dispatch(handlePlayThisSong({ song }));
-      dispatch(setCurrentSong({ song }));
-      dispatch(setCurrentIndex({ id: newIndex }));
-      console.log("asdsad", song);
     },
     [
-      category,
       currentSongIndex,
-      currentPlayedSong,
+      searchSongsArr,
       favSongArr,
-      currentPlaylistSongsList
+      currentPlaylistSongsList,
+      category,
+      currentPlayedSong
     ]
   );
 

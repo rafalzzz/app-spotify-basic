@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { playedRX, durationRX } from "../../../../store/player/selectors";
 
-import { setPlayed } from "../../../../store/player/actions";
+import { seekTo } from "../../../../store/player/actions";
 
 import { BarLayout } from "./layout";
 
@@ -22,7 +22,7 @@ export const Bar = memo(() => {
 
   const handleSeekChange = e => {
     let second = parseFloat(e.target.value);
-    dispatch(setPlayed({ played: second }));
+    dispatch(seekTo({ seekTo: second }));
   };
 
   const handleSetRemaining = useCallback(

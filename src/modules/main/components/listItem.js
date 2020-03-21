@@ -82,6 +82,7 @@ export const ListItem = ({
         setPlayingThisSongNow(true);
         setShowPlayButton(true);
         dispatch(setCurrentIndex({ id }));
+        dispatch(handlePlayOrStop({ play: true }));
       }
     },
     [currentSongName]
