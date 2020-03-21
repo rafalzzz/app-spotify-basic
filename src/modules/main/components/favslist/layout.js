@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { TableContainer } from "../table.styled";
 import { TableHeader } from "../tableHeader";
@@ -11,8 +11,13 @@ export const FavsListLayout = ({
   playOrNot,
   handleAddSongToFav,
   handleDeleteSongFromFav,
-  handleSetCurrentSong
+  handleSetCurrentSong,
+  changeCategory
 }) => {
+  useEffect(() => {
+    changeCategory();
+  }, []);
+
   return (
     <TableContainer>
       <div className="table">

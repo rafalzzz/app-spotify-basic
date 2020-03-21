@@ -5,6 +5,7 @@ import { TableHeader } from "../tableHeader";
 import { ListItem } from "../listItem";
 
 export const PlaylistLayout = ({
+  songs,
   favList,
   currentSongName,
   NowIsPlaying,
@@ -18,11 +19,11 @@ export const PlaylistLayout = ({
       <div className="table">
         <TableHeader />
         {favList &&
-          favList.map((favListItem, i = 0) => (
+          songs.map((song, i = 0) => (
             <div key={i++}>
               <ListItem
                 id={i++}
-                song={favListItem.song}
+                song={song}
                 favList={favList}
                 currentSongName={currentSongName}
                 NowIsPlaying={NowIsPlaying}

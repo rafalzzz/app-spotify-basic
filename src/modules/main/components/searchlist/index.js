@@ -52,10 +52,10 @@ export const SearchList = memo(() => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const changeCategory = () => {
     dispatch(setCurrentCategory({ term: "search" }));
     dispatch(fetchSongsStarted({ term: "pop" }));
-  }, []);
+  };
 
   // Favourite songs functions
 
@@ -96,6 +96,7 @@ export const SearchList = memo(() => {
       handleSetCurrentSong={handleSetCurrentSong}
       loading={loading}
       error={error}
+      changeCategory={changeCategory}
     />
   );
 });

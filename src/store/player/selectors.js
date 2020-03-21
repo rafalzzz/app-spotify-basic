@@ -1,0 +1,11 @@
+export const playedRX = state => state.player.played;
+export const pipRX = state => state.player.pip;
+export const controlsRX = state => state.player.controls;
+export const lightRX = state => state.player.light;
+export const volumeRX = state => state.player.volume;
+export const mutedRX = state => state.player.muted;
+export const loadedRX = state => state.player.loaded;
+export const durationRX = state => state.player.duration;
+export const playbackRateRX = state => state.player.playbackRate;
+export const loopRX = state => state.player.loop;
+export const seekToRX = state => state.player.seekTo;

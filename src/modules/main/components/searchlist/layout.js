@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { fetchSongsStarted } from "../../../../store/fetchSongs/actions";
+
+import { setCurrentCategory } from "../../../../store/currentItems/actions";
 
 import { TableContainer } from "../table.styled";
 import { TableHeader } from "../tableHeader";
@@ -12,8 +16,13 @@ export const SearchListLayout = ({
   playOrNot,
   handleAddSongToFav,
   handleDeleteSongFromFav,
-  handleSetCurrentSong
+  handleSetCurrentSong,
+  changeCategory
 }) => {
+  useEffect(() => {
+    changeCategory();
+  }, []);
+
   return (
     <TableContainer>
       <div className="table">

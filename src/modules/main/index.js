@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -6,7 +6,7 @@ import { fetchSongsStarted } from "../../store/fetchSongs/actions";
 
 import { MainLayout } from "./layout";
 
-export const Main = () => {
+export const Main = memo(() => {
   const [term, setTerm] = useState("");
 
   const dispatch = useDispatch();
@@ -26,4 +26,4 @@ export const Main = () => {
       handleOnSubmit={handleOnSubmit}
     />
   );
-};
+});

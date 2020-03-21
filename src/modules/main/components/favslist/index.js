@@ -44,6 +44,10 @@ export const FavsList = memo(() => {
 
   const dispatch = useDispatch();
 
+  const changeCategory = () => {
+    dispatch(setCurrentCategory({ term: "favList" }));
+  };
+
   useEffect(() => {
     dispatch(setCurrentCategory({ term: "favList" }));
   }, []);
@@ -87,6 +91,7 @@ export const FavsList = memo(() => {
       handleSetCurrentSong={handleSetCurrentSong}
       loading={loading}
       error={error}
+      changeCategory={changeCategory}
     />
   );
 });

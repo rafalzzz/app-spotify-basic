@@ -8,7 +8,7 @@ import { Login } from "./loginPanel/index";
 import { LogoutMenu } from "./logoutMenu/layout";
 import { Sidebar } from "./sidebar/index";
 import { Main } from "./main/index";
-import { Footer } from "./footer/index";
+import { Player } from "./player/index";
 
 export const Layout = () => {
   const [user, setUser] = useState(false);
@@ -43,7 +43,7 @@ export const Layout = () => {
           <LogoutMenu handleSignOut={handleSignOut} username={user} />
           <Sidebar />
           <Main />
-          <Footer />
+          <Player />
         </Route>
       </Switch>
     </div>
