@@ -1,13 +1,13 @@
 import {
   FETCH_SONGS_STARTED,
   FETCH_SONGS_FAILURE,
-  FETCH_SONGS_SUCCESS,
-} from './consts';
+  FETCH_SONGS_SUCCESS
+} from "./consts";
 
 export const initialState = {
   songs: [],
-  songsLoading: false,
-  isError: false,
+  isLoading: false,
+  isError: false
 };
 
 export const fetchSongsReducer = (state = initialState, action) => {
@@ -16,22 +16,22 @@ export const fetchSongsReducer = (state = initialState, action) => {
       return {
         ...state,
         songs: [],
-        songsLoading: true,
-        isError: false,
+        isLoading: true,
+        isError: false
       };
     case FETCH_SONGS_SUCCESS:
       return {
         ...state,
         songs: action.payload,
-        songsLoading: false,
-        isError: false,
+        isLoading: false,
+        isError: false
       };
     case FETCH_SONGS_FAILURE:
       return {
         ...state,
         songs: [],
-        songsLoading: false,
-        isError: true,
+        isLoading: false,
+        isError: true
       };
     default:
       return { ...state };
