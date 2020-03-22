@@ -4,15 +4,20 @@
   padding: 0px;
   display: flex;
   flex-direction: row;
-  /* background-color: #121212; */
+  background-color: #121212;
 
-  background-image: url("Layout1.png");
-  /* width: 100%; */
+  /* background-image: url("Layout1.png");
+  width: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 
   @font-face {
-    font-family: 'Lato', sans-serif;
-    src: url(https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap);
+    font-family: "Lato", sans-serif;
+    src: url(
+      https://fonts.googleapis.com/css?family=Lato:300,
+      400,
+      700,
+      900&display=swap
+    );
   }
 }
