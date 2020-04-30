@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, memo } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { loadingSongs, isError } from "../../../../store/fetchSongs/selectors";
+import { isLoading, isError } from "../../../../store/fetchSongs/selectors";
 
 import { favSongsList } from "../../../../store/favSongs/selectors";
 
@@ -13,22 +13,22 @@ import {
   currentIndex,
   currentPlaylist,
   playOrStop,
-  NowPlayedSong
+  NowPlayedSong,
 } from "../../../../store/currentItems/selectors";
 
 import {
   addSongToFav,
-  deleteSongFromFav
+  deleteSongFromFav,
 } from "../../../../store/favSongs/actions";
 
 import {
   setCurrentCategory,
-  setCurrentSong
+  setCurrentSong,
 } from "../../../../store/currentItems/actions";
 
 import {
   handleSendFavSongToFirestore,
-  handleDeleteFavSongFromFirestore
+  handleDeleteFavSongFromFirestore,
 } from "../../../../helpers/FireStoreData";
 
 import { PlaylistLayout } from "./layout";
@@ -48,7 +48,7 @@ export const Playlist = memo(() => {
 
   const currentSongIndex = useSelector(currentIndex);
 
-  const loading = useSelector(loadingSongs);
+  const loading = useSelector(isLoading);
   const error = useSelector(isError);
 
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ export const Playlist = memo(() => {
   // Download songs from current playlist
 
   const returnCurrentPlaylistSongs = () => {
-    currentPlaylistSongs.map(playlist =>
+    currentPlaylistSongs.map((playlist) =>
       playlist.name === currentPlaylistName
         ? setCurrentPlaylistSongsList(playlist.songs)
         : null
@@ -71,7 +71,7 @@ export const Playlist = memo(() => {
   // Favourite songs functions
 
   const handleAddSongToFav = useCallback(
-    song => event => {
+    (song) => (event) => {
       dispatch(addSongToFav({ song }));
       handleSendFavSongToFirestore(song);
     },
@@ -79,7 +79,7 @@ export const Playlist = memo(() => {
   );
 
   const handleDeleteSongFromFav = useCallback(
-    (song, id) => event => {
+    (song, id) => (event) => {
       dispatch(deleteSongFromFav({ id }));
       handleDeleteFavSongFromFirestore(song);
     },
@@ -89,7 +89,7 @@ export const Playlist = memo(() => {
   // CurrentItems function
 
   const handleSetCurrentSong = useCallback(
-    song => event => {
+    (song) => (event) => {
       dispatch(setCurrentSong({ song }));
     },
     [currentSongIndex]

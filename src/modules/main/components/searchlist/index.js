@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
   songsArray,
-  loadingSongs,
-  isError
+  isLoading,
+  isError,
 } from "../../../../store/fetchSongs/selectors";
 
 import { favSongsList } from "../../../../store/favSongs/selectors";
@@ -14,24 +14,24 @@ import {
   currentSong,
   currentIndex,
   playOrStop,
-  NowPlayedSong
+  NowPlayedSong,
 } from "../../../../store/currentItems/selectors";
 
 import { fetchSongsStarted } from "../../../../store/fetchSongs/actions";
 
 import {
   addSongToFav,
-  deleteSongFromFav
+  deleteSongFromFav,
 } from "../../../../store/favSongs/actions";
 
 import {
   setCurrentCategory,
-  setCurrentSong
+  setCurrentSong,
 } from "../../../../store/currentItems/actions";
 
 import {
   handleSendFavSongToFirestore,
-  handleDeleteFavSongFromFirestore
+  handleDeleteFavSongFromFirestore,
 } from "../../../../helpers/FireStoreData";
 
 import { SearchListLayout } from "./layout";
@@ -45,7 +45,7 @@ export const SearchList = memo(() => {
   const NowIsPlaying = useSelector(NowPlayedSong);
   const playOrNot = useSelector(playOrStop);
 
-  const loading = useSelector(loadingSongs);
+  const loading = useSelector(isLoading);
   const error = useSelector(isError);
 
   const currentSongIndex = useSelector(currentIndex);
@@ -60,7 +60,7 @@ export const SearchList = memo(() => {
   // Favourite songs functions
 
   const handleAddSongToFav = useCallback(
-    song => event => {
+    (song) => (event) => {
       dispatch(addSongToFav({ song }));
       handleSendFavSongToFirestore(song);
     },
@@ -68,7 +68,7 @@ export const SearchList = memo(() => {
   );
 
   const handleDeleteSongFromFav = useCallback(
-    (song, id) => event => {
+    (song, id) => (event) => {
       dispatch(deleteSongFromFav({ id }));
       handleDeleteFavSongFromFirestore(song);
     },
@@ -78,7 +78,7 @@ export const SearchList = memo(() => {
   // CurrentItems function
 
   const handleSetCurrentSong = useCallback(
-    song => event => {
+    (song) => (event) => {
       dispatch(setCurrentSong({ song }));
     },
     [currentSongIndex]
