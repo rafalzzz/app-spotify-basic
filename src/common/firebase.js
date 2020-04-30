@@ -1,21 +1,20 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA5UgL15JX4pq0fnAITMHIAx1FhhUj7ut8",
-    authDomain: "ify-7881d.firebaseapp.com",
-    databaseURL: "https://ify-7881d.firebaseio.com",
-    projectId: "ify-7881d",
-    storageBucket: "ify-7881d.appspot.com",
-    messagingSenderId: "562681632078",
-    appId: "1:562681632078:web:fdc480d7e7faf32d2a3a1f",
-    measurementId: "G-C9JVV75HTM"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  apiKey: "AIzaSyBNTOV95IjjIcVpOwfyAhIg7C19H89FR8Q",
+  authDomain: "ify-simple-d2d1f.firebaseapp.com",
+  databaseURL: "https://ify-simple-d2d1f.firebaseio.com",
+  projectId: "ify-simple-d2d1f",
+  storageBucket: "ify-simple-d2d1f.appspot.com",
+  messagingSenderId: "720692364590",
+  appId: "1:720692364590:web:8d2948222e965c74d526bf",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-  export const auth = firebase.auth()
-  export const db = firebase.firestore()
+export const auth = firebase.auth();
+export const db = firebase.firestore();
 
-  export default firebase
+export default firebase;
