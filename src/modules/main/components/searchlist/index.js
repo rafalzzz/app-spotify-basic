@@ -59,21 +59,15 @@ export const SearchList = memo(() => {
 
   // Favourite songs functions
 
-  const handleAddSongToFav = useCallback(
-    (song) => (event) => {
-      dispatch(addSongToFav({ song }));
-      handleSendFavSongToFirestore(song);
-    },
-    []
-  );
+  const handleAddSongToFav = (song) => {
+    dispatch(addSongToFav({ song }));
+    handleSendFavSongToFirestore(song);
+  };
 
-  const handleDeleteSongFromFav = useCallback(
-    (song, id) => (event) => {
-      dispatch(deleteSongFromFav({ id }));
-      handleDeleteFavSongFromFirestore(song);
-    },
-    []
-  );
+  const handleDeleteSongFromFav = (song, id) => {
+    dispatch(deleteSongFromFav({ id }));
+    handleDeleteFavSongFromFirestore(song);
+  };
 
   // CurrentItems function
 

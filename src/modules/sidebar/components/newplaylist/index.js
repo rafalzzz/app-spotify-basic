@@ -15,24 +15,28 @@ export const NewPlaylist = () => {
   const dispatch = useDispatch();
 
   const handlePlaylistForm = useCallback(
-    event => () => {
-      setPlaylistFormIsOpen(!playlistFormIsOpen);
+    (isOpen) => (event) => {
+      if (isOpen === false) {
+        setPlaylistFormIsOpen(true);
+      } else if (isOpen === true) {
+        setPlaylistFormIsOpen(false);
+      }
     },
-    []
+    [playlistFormIsOpen]
   );
 
-  const handlePlaylistName = e => {
+  const handlePlaylistName = (e) => {
     e.preventDefault();
     setPlaylistName(e.target.value);
   };
 
-  const handleCreatePlaylist = useCallback(name => {
+  const handleCreatePlaylist = useCallback((name) => {
     dispatch(createPlaylist({ name }));
 
     handleAddPlaylistToFirestore(name);
   }, []);
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     if (playlistName === "") {
       setPlaylistFormIsOpen(false);
@@ -45,7 +49,7 @@ export const NewPlaylist = () => {
 
   return (
     <NewPlaylistLayout
-      onClick={handlePlaylistForm}
+      playlistFormIsOpen={playlistFormIsOpen}
       handlePlaylistForm={handlePlaylistForm}
       handleOnSubmit={handleOnSubmit}
       handlePlaylistName={handlePlaylistName}

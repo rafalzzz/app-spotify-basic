@@ -8,10 +8,10 @@ export const NewPlaylistLayout = ({
   handleOnSubmit,
   playlistFormIsOpen,
   handlePlaylistForm,
-  handlePlaylistName
+  handlePlaylistName,
 }) => (
   <NewPlaylistContainer>
-    <div onClick={handlePlaylistForm()}>
+    <div onClick={handlePlaylistForm(playlistFormIsOpen)}>
       <i className="icon-plus" />
       New Playlist
     </div>

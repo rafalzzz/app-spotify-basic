@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
 
-import { fetchSongsStarted } from "../../../../store/fetchSongs/actions";
-
-import { setCurrentCategory } from "../../../../store/currentItems/actions";
-
 import { TableContainer } from "../table.styled";
 import { TableHeader } from "../tableHeader";
 import { ListItem } from "../listItem";
@@ -17,7 +13,7 @@ export const SearchListLayout = ({
   handleAddSongToFav,
   handleDeleteSongFromFav,
   handleSetCurrentSong,
-  changeCategory
+  changeCategory,
 }) => {
   useEffect(() => {
     changeCategory();

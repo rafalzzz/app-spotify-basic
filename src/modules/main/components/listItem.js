@@ -5,7 +5,7 @@ import Duration from "../../../helpers/Duration";
 import {
   setCurrentIndex,
   handlePlayOrStop,
-  handlePlayThisSong
+  handlePlayThisSong,
 } from "../../../store/currentItems/actions";
 import { useDispatch } from "react-redux";
 
@@ -20,7 +20,7 @@ export const ListItem = ({
   playOrNot,
   handleAddSongToFav,
   handleDeleteSongFromFav,
-  handleSetCurrentSong
+  handleSetCurrentSong,
 }) => {
   const [favChecked, setFavChecked] = useState(false);
   const [playingThisSongNow, setPlayingThisSongNow] = useState(false);
@@ -30,28 +30,31 @@ export const ListItem = ({
 
   // FavSongs functions
 
-  const handleOnClick = (song, id) => {
-    if (favChecked === false) {
-      handleAddSongToFav(song);
-      setFavChecked(true);
-    }
-    if (favChecked === true) {
-      handleDeleteSongFromFav(song, id);
-      setFavChecked(false);
-    }
-  };
+  const handleOnClick = useCallback(
+    (song, id) => (event) => {
+      if (favChecked === false) {
+        handleAddSongToFav(song);
+        setFavChecked(true);
+      }
+      if (favChecked === true) {
+        handleDeleteSongFromFav(song, id);
+        setFavChecked(false);
+      }
+    },
+    [favChecked]
+  );
 
   // Show/Hide Play/Stop Icon functions
 
   const handleOnMouseEnter = useCallback(
-    event => {
+    (event) => {
       setShowPlayButton(true);
     },
     [showPlayButton]
   );
 
   const handleOnMouseLeave = useCallback(
-    event => {
+    (event) => {
       if (playingThisSongNow) {
         setShowPlayButton(true);
       } else {
@@ -64,7 +67,7 @@ export const ListItem = ({
   // Play this song functions
 
   const handlePlayThisSongNow = useCallback(
-    event => {
+    (event) => {
       if (NowIsPlaying.previewUrl === song.previewUrl) {
         if (playOrNot === true) {
           dispatch(handlePlayOrStop({ play: false }));
@@ -91,7 +94,7 @@ export const ListItem = ({
   // Show songs added to favList
 
   useEffect(() => {
-    favList.map(favListItem => {
+    favList.map((favListItem) => {
       if (favListItem.song.previewUrl === song.previewUrl) setFavChecked(true);
     });
   }, []);
@@ -135,7 +138,7 @@ export const ListItem = ({
             backgroundColor:
               currentSongName.song.previewUrl === song.previewUrl
                 ? "#ffffff10"
-                : "transparent"
+                : "transparent",
           }}
           onClick={handlePlayThisSongNow}
         >
@@ -156,9 +159,9 @@ export const ListItem = ({
             backgroundColor:
               currentSongName.song.previewUrl === song.previewUrl
                 ? "#ffffff10"
-                : "transparent"
+                : "transparent",
           }}
-          onClick={e => handleOnClick(song, song.previewUrl)}
+          onClick={handleOnClick(song, song.previewUrl)}
         >
           {favChecked ? (
             <i className="icon-heart" />
@@ -176,7 +179,7 @@ export const ListItem = ({
             color:
               NowIsPlaying.previewUrl === song.previewUrl
                 ? "#1ed760"
-                : "#b3b3b3"
+                : "#b3b3b3",
           }}
         >
           {song.trackName}
@@ -191,7 +194,7 @@ export const ListItem = ({
             color:
               NowIsPlaying.previewUrl === song.previewUrl
                 ? "#1ed760"
-                : "#b3b3b3"
+                : "#b3b3b3",
           }}
         >
           {song.artistName}
@@ -206,7 +209,7 @@ export const ListItem = ({
             color:
               NowIsPlaying.previewUrl === song.previewUrl
                 ? "#1ed760"
-                : "#b3b3b3"
+                : "#b3b3b3",
           }}
         >
           {song.collectionName}
@@ -221,7 +224,7 @@ export const ListItem = ({
             color:
               NowIsPlaying.previewUrl === song.previewUrl
                 ? "#1ed760"
-                : "#b3b3b3"
+                : "#b3b3b3",
           }}
         >
           {song.releaseDate.slice(0, 10)}
@@ -236,7 +239,7 @@ export const ListItem = ({
             color:
               NowIsPlaying.previewUrl === song.previewUrl
                 ? "#1ed760"
-                : "#b3b3b3"
+                : "#b3b3b3",
           }}
         >
           <Duration seconds={parseInt(song.trackTimeMillis / 1000)} />
