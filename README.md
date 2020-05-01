@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## About this app
+
+            My main goal during writing this app was build simple spotify version. <br />
+            I used iTunes API to download tracks, Firestore to save data and redux to manage actions.
+
 ## Available Scripts
 
 In the project directory, you can run:
