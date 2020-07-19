@@ -1,4 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About this app
+
+This App was created in Create-React-App.<br />
+
+My main goal during creating this app was to build simple version of spotify web app.<br />
+
+In this App I used: <br />
+•	iTunes API to fetch data about songs, albums and artists,<br />
+•	redux to manage state,<br />
+•	redux-saga to handle asynchronous actions (i.e. like data fetching),<br />
+•	react-router and react-router-dom to navigate components,<br />
+•	axios to fetch data,<br />
+•	styled-components to design layout,<br />
+•	react-player to play songs,<br />
+•	Firebase to add authenticate using Google Sign-In,<br />
+•	Cloud Firestore to save data.<br />
+
+Screenshots:<br />
+
+![GitHub Logo](/screenshots/login.png)
+
+![GitHub Logo](/screenshots/main.png)
+
+![GitHub Logo](/screenshots/search-results.png)
+
+![GitHub Logo](/screenshots/favSongs-section.png)
+
+![GitHub Logo](/screenshots/playlist.png)
 
 ## About this app
 
